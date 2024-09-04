@@ -59,7 +59,7 @@ function applyChanges() {
         </div>
         <div class="task__footer">
             <tasks-task-actions :taskId="props.task.id" :view="'icon'" class="task__actions" />
-            <button class="footer__btns-btn" @click="changeAlertState(true)"><img
+            <button class="footer__btn" @click="changeAlertState(true)"><img
                     src="~/assets/img/pages/delete-icon.svg" alt="delete"></button>
         </div>
         <popups-alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true"
@@ -111,6 +111,12 @@ function applyChanges() {
             position: relative;
             min-height: 50px;
             justify-content: flex-end;
+            gap: 1rem;
+
+            .footer__btn {
+                height: fit-content;
+                align-self: flex-end;
+            }
         }
 
         &-card__actions {

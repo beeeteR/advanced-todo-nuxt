@@ -60,7 +60,7 @@ onMounted(() => {
         <div ref="taskActionsEl" class="task-actions" :class="{ '--task-actions-icon': props.view === 'icon' }">
             <div class="task-actions__btn" @click="toggleStateTaskActions">
                 <div class="task-actions__icon" v-if="props.view === 'icon'">
-                    <img src="../assets/img/pages/edit-icon.svg" alt="">
+                    <img src="~/assets/img/pages/edit-icon.svg" alt="">
                 </div>
                 <div class="actions-element" v-else>
                     <div class="actions-element__decor"></div>
