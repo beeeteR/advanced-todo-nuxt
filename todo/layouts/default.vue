@@ -28,19 +28,19 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .app {
-    background-color: var(--dark-gray);
+    background-color: map-get($colors, 'dark-gray');
     height: 100vh;
     display: flex;
     flex-direction: column;
-}
 
-.wrapper {
-    width: 100%;
-    padding-top: 56px;
-    padding-bottom: 56px;
-    padding-right: 56px;
-    padding-left: calc(var(--padding-right-side-nav) + var(--width-side-nav) + 56px);
+    .wrapper {
+        width: 100%;
+        padding-top: 56px;
+        padding-bottom: 56px;
+        padding-right: 56px;
+        padding-left: calc($padding-right-side-nav + $width-side-nav + 56px);
+    }
 }
 </style>

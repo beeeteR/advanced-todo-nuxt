@@ -23,24 +23,26 @@ watch(route, () => {
     </div>
 </template>
 
-<style>
-.page-title-wrapper {
-    width: fit-content;
-    position: relative;
-}
+<style lang="scss">
+.page-title {
+    &-wrapper {
+        width: fit-content;
+        position: relative;
+    }
 
-.page-title__text {
-    font-size: 1.3rem;
-    font-weight: 600;
-}
+    &__text {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
 
-.page-title__line {
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: v-bind(lineWidth);
-    height: 2px;
-    background-color: var(--orange);
-    border-radius: 0.5rem;
+    &__line {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: v-bind(lineWidth);
+        height: 2px;
+        background-color: map-get($colors, 'orange');
+        border-radius: 0.5rem;
+    }
 }
 </style>

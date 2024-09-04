@@ -60,104 +60,110 @@ function changingDate(timestamp: number) {
 </template>
 
 
-<style>
-.header__content {
-    background-color: #F8F8F8;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    padding: 24px 72px;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 7%);
-}
+<style lang="scss">
+.header {
+    &__content {
+        background-color: #F8F8F8;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 24px 72px;
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 7%);
 
-.logo {
-    font-size: 32px;
-    font-weight: 600;
-    width: fit-content;
-}
+        .logo {
+            font-size: 32px;
+            font-weight: 600;
+            width: fit-content;
 
-.logo span:first-child {
-    color: var(--pink);
-}
+            span {
+                &:first-child {
+                    color: map-get($colors, 'pink');
+                }
+            }
+        }
 
-.search {
-    display: flex;
-}
+        .search {
+            display: flex;
 
-.search__input {
-    width: 100%;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 0.5rem;
-    box-shadow: -2px 2px 4px 2px rgb(235, 235, 235);
-    transition: all 200ms;
-}
+            &__input {
+                width: 100%;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 0.5rem;
+                box-shadow: -2px 2px 4px 2px rgb(235, 235, 235);
+                transition: all 200ms;
 
-.search__input:focus {
-    box-shadow: 0 2px 8px 2px rgb(200, 200, 200);
-}
+                &:focus {
+                    box-shadow: 0 2px 8px 2px rgb(200, 200, 200);
+                }
+            }
 
-.search__btn {
-    transform: translateX(-100%);
-}
+            &__btn {
+                transform: translateX(-100%);
 
-.search__btn img {
-    height: 100%;
-    aspect-ratio: 1;
-}
+                img {
+                    height: 100%;
+                    aspect-ratio: 1;
+                }
+            }
+        }
+    }
 
-.header__info {
-    justify-self: end;
-    display: flex;
-    gap: 2rem;
-}
+    &__info {
+        justify-self: end;
+        display: flex;
+        gap: 2rem;
+    }
 
-.header__btns {
-    display: flex;
-    gap: 1rem;
-}
+    &__btns {
+        display: flex;
+        gap: 1rem;
 
-.btn-img {
-    cursor: pointer;
-    position: relative;
-}
+        .btn {
+            &-img {
+                cursor: pointer;
+                position: relative;
+            }
 
-.btn__input-datetime {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
+            &__input-datetime {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
 
-.btn__input-datetime::-webkit-calendar-picker-indicator {
-    -webkit-appearance: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 90%;
-    cursor: pointer;
-}
+                &::-webkit-calendar-picker-indicator {
+                    -webkit-appearance: none;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 90%;
+                    height: 90%;
+                    cursor: pointer;
+                }
+            }
 
-.btn img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1;
-}
+            img {
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 1;
+            }
+        }
+    }
 
-.header__this-day {
-    display: flex;
-    flex-direction: column;
-}
+    &__this-day {
+        display: flex;
+        flex-direction: column;
 
-.header__this-day span {
-    font-weight: 500;
-}
+        span {
+            font-weight: 500;
 
-.header__this-day span:last-child {
-    color: var(--light-blue);
+            &:last-child {
+                color: map-get($colors, 'light-blue');
+            }
+        }
+    }
 }
 </style>

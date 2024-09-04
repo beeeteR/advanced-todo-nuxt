@@ -46,24 +46,24 @@ watch(selectedDateTimestamp, () => emits("changeDate", selectedDateTimestamp.val
     @change="updateSelectedDate" />
 </template>
 
-<style>
+<style lang="scss">
 .input-date {
   cursor: text;
-}
 
-.input-date::-webkit-calendar-picker-indicator {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  background-image: url(~/assets/img/pages/input-date.svg);
-  background-repeat: no-repeat;
-  transform: scale(0.9);
-  cursor: pointer;
-  z-index: 1;
-  transition: all 300ms;
-}
+  &::-webkit-calendar-picker-indicator {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background-image: url(~/assets/img/pages/input-date.svg);
+    background-repeat: no-repeat;
+    transform: scale(0.9);
+    cursor: pointer;
+    z-index: 1;
+    transition: all 300ms;
 
-.input-date::-webkit-calendar-picker-indicator:hover {
-  transform: scale(1);
+    &:hover {
+      transform: scale(1);
+    }
+  }
 }
 </style>

@@ -29,7 +29,7 @@ const createdTasksCount = computed(() => {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .general__status {
     display: flex;
     justify-content: space-between;

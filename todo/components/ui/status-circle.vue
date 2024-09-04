@@ -25,10 +25,8 @@ z
     </div>
 </template>
 
-<style>
-:root {
-    --stroke-circle: 4px;
-}
+<style lang="scss">
+$stroke-circle: 4px;
 
 .status-circle {
     display: flex;
@@ -36,57 +34,57 @@ z
     align-items: center;
     gap: 1rem;
     padding-top: 1.5rem;
-}
 
-.status-circle__title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+    &__title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
 
-.status-circle__title::before {
-    content: "";
-    display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: v-bind(localeColor);
-}
+        &::before {
+            content: "";
+            display: inline-block;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: v-bind(localeColor);
+        }
+    }
 
-.circular-chart {
-    display: block;
-    max-width: 200px;
-    max-height: 200px;
-}
+    .circular-chart {
+        display: block;
+        max-width: 200px;
+        max-height: 200px;
 
-.circle-bg {
-    fill: none;
-    stroke: var(--light-grey);
-    stroke-width: var(--stroke-circle);
-}
+        .circle-bg {
+            fill: none;
+            stroke: map-get($colors, 'light-grey');
+            stroke-width: $stroke-circle;
+        }
 
-.percentage {
-    font-weight: 500;
-    font-size: 0.45rem;
-    text-anchor: middle;
-}
+        .percentage {
+            font-weight: 500;
+            font-size: 0.45rem;
+            text-anchor: middle;
+        }
 
-.circle {
-    fill: none;
-    stroke-width: var(--stroke-circle);
-}
+        .circle {
+            fill: none;
+            stroke-width: $stroke-circle;
 
-.--stroke-green {
-    stroke: var(--green);
-}
+            &.--stroke-green {
+                stroke: map-get($colors, 'green');
+            }
 
-.--stroke-red {
-    stroke: var(--red);
-}
+            &.--stroke-red {
+                stroke: map-get($colors, 'red');
+            }
 
-.--stroke-blue {
-    stroke: var(--blue);
+            &.--stroke-blue {
+                stroke: map-get($colors, 'blue');
+            }
+        }
+    }
 }
 </style>

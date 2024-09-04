@@ -66,56 +66,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
-.alert-wrapper {
-    position: fixed;
-    top: -150vh;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 1rem 2rem;
-    background-color: var(--red);
-    border-radius: 0.5rem;
-    opacity: 1;
-    z-index: 100;
-    cursor: pointer;
-    transition: all 400ms;
-}
-
-.alert-wrapper:hover {
-    opacity: 0.8;
-}
-
-.--alert-active {
-    top: 5%;
-}
-
-.alert-text {
-    color: white;
-    font-weight: 500;
-    font-size: 1.15rem;
-}
-
-.--is-question {
-    cursor: auto;
-}
-
-.--is-question:hover {
-    opacity: 1;
-}
-
-.alert-btn {
-    transition: all 300ms;
-}
-
-.alert-btn:hover {
-    box-shadow: 0 0 4px 2px white;
-}
-
+<style lang="scss">
 @keyframes progress-bar {
     from {
         width: 0;
@@ -123,6 +74,58 @@ onMounted(() => {
 
     to {
         width: 100%;
+    }
+}
+
+.alert {
+    &-wrapper {
+        position: fixed;
+        top: -150vh;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 1rem 2rem;
+        background-color: map-get($colors, 'red');
+        border-radius: 0.5rem;
+        opacity: 1;
+        z-index: 100;
+        cursor: pointer;
+        transition: all 400ms;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &-text {
+        color: white;
+        font-weight: 500;
+        font-size: 1.15rem;
+    }
+
+    &-btn {
+        transition: all 300ms;
+
+        &:hover {
+            box-shadow: 0 0 4px 2px white;
+        }
+    }
+}
+
+
+.--alert-active {
+    top: 5%;
+}
+
+.--is-question {
+    cursor: auto;
+
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -135,7 +138,7 @@ onMounted(() => {
     width: 0;
     height: 8px;
     background-color: white;
-    background-image: linear-gradient(to right, var(--pink) 65%, white);
+    background-image: linear-gradient(to right, map-get($colors, 'pink') 65%, white);
     border-radius: 0.5rem;
     animation-name: progress-bar;
     animation-duration: 7000ms;

@@ -7,23 +7,23 @@ const route = ref(useRoute())
 <template>
     <div class="side-nav">
         <div class="nav__links">
-            <nuxt-link to="/" class="nav__link" :class="{'--link-active': route.name === 'index'}">
+            <nuxt-link to="/" class="nav__link" :class="{ '--link-active': route.name === 'index' }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/dashboard.svg"></img>
                 <p class="nav__link-title">Главная</p>
             </nuxt-link>
-            <nuxt-link to="/create-task" class="nav__link" :class="{'--link-active': route.name === 'create-task'}">
+            <nuxt-link to="/create-task" class="nav__link" :class="{ '--link-active': route.name === 'create-task' }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/add-task.svg"></img>
                 <p class="nav__link-title">Создать задачу</p>
             </nuxt-link>
-            <nuxt-link to="/my-tasks" class="nav__link" :class="{'--link-active': route.name === 'my-tasks'}">
+            <nuxt-link to="/my-tasks" class="nav__link" :class="{ '--link-active': route.name === 'my-tasks' }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/my-task.svg"></img>
                 <p class="nav__link-title">Мои задачи</p>
             </nuxt-link>
-            <nuxt-link to="/vital-tasks" class="nav__link" :class="{'--link-active': route.name === 'vital-tasks'}">
+            <nuxt-link to="/vital-tasks" class="nav__link" :class="{ '--link-active': route.name === 'vital-tasks' }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/vital.svg"></img>
                 <p class="nav__link-title">Важные задачи</p>
             </nuxt-link>
-            <nuxt-link to="/params" class="nav__link" :class="{'--link-active': route.name === 'params'}">
+            <nuxt-link to="/params" class="nav__link" :class="{ '--link-active': route.name === 'params' }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/settings.svg"></img>
                 <p class="nav__link-title">Настройки</p>
             </nuxt-link>
@@ -31,11 +31,9 @@ const route = ref(useRoute())
     </div>
 </template>
 
-<style>
-:root {
-    --filter-pink: brightness(0) saturate(100%) invert(56%) sepia(23%) saturate(5305%) hue-rotate(322deg) brightness(106%) contrast(103%);
-    --filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
-}
+<style lang="scss">
+$filter-pink: brightness(0) saturate(100%) invert(56%) sepia(23%) saturate(5305%) hue-rotate(322deg) brightness(106%) contrast(103%);
+$filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
 
 @keyframes rotating {
     from {
@@ -58,56 +56,58 @@ const route = ref(useRoute())
 }
 
 .side-nav {
-    width: var(--width-side-nav);
+    width: $width-side-nav;
     height: 100vh;
     position: fixed;
     top: 144px;
     left: 0;
-    padding: 32px var(--padding-right-side-nav);
+    padding: 32px $padding-right-side-nav;
     border-top-right-radius: 0.5rem;
-    background-color: var(--pink);
-}
+    background-color: map-get($colors, 'pink');
 
-.nav__links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+    .nav {
+        &__links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
 
-.nav__link {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    transition: all 400ms;
-}
+            .--link-active {
+                background-color: white;
 
-.--link-active {
-    background-color: white;
-}
+                .nav__link-img {
+                    filter: $filter-pink;
+                    transform: rotateY(360deg);
+                    animation-name: rotating;
+                    animation-duration: 400ms;
+                }
 
-.--link-active .nav__link-img {
-    filter: var(--filter-pink);
-    transform: rotateY(360deg);
-    animation-name: rotating;
-    animation-duration: 400ms;
-}
+                .nav__link-title {
+                    color: map-get($colors, 'pink');
+                }
+            }
+        }
 
-.--link-active .nav__link-title {
-    color: var(--pink);
-}
+        &__link {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: all 400ms;
 
-.nav__link-img {
-    width: 24px;
-    aspect-ratio: 1;
-    filter: var(--filter-white);
-    transform: rotateY(0deg);
-    animation-name: rotating-reverse;
-    animation-duration: 400ms;
-}
+            &-img {
+                width: 24px;
+                aspect-ratio: 1;
+                filter: $filter-white;
+                transform: rotateY(0deg);
+                animation-name: rotating-reverse;
+                animation-duration: 400ms;
+            }
 
-.nav__link-title {
-    font-weight: 500;
-    color: white;
+            &-title {
+                font-weight: 500;
+                color: white;
+            }
+        }
+    }
 }
 </style>

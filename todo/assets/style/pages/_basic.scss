@@ -1,18 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-:root {
-    --width-side-nav: 340px;
-    --padding-right-side-nav: 24px;
-}
 
 * {
-    color: var(--white);
     font-family: "Inter", sans-serif !important;
 }
 
 input {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--light-grey);
+    border: 1px solid map-get($colors, 'light-grey');
     border-radius: 0.5rem;
     transition: all 200ms;
 }
@@ -33,7 +28,7 @@ textarea {
 
 .btn {
     color: white;
-    background-color: var(--orange);
+    background-color: map-get($colors, 'orange');
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
     font-weight: 400;

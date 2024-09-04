@@ -72,7 +72,8 @@ function callAlert(title: string) {
         <form method="post" class="create-task-form" enctype="multipart/form-data">
             <div class="create-task-form__vert-elem">
                 <div class="task-form-elem">
-                    <p class="task-form-elem__input-title" :class="{ '--text-red': newTask.name.length == 0 }">Название</p>
+                    <p class="task-form-elem__input-title" :class="{ '--text-red': newTask.name.length == 0 }">Название
+                    </p>
                     <input type="text" name="title" class="task-form-elem__input"
                         :class="{ '--btn-red': newTask.name.length == 0 }" v-model="newTask.name">
                 </div>
@@ -84,24 +85,24 @@ function callAlert(title: string) {
                     <p class="task-form-elem__input-title">Приоритет</p>
                     <div class="create-task-form__hor-elem">
                         <div class="priority-input-wrapper">
-                            <input type="radio" name="priority" id="extreme" class="task-form-elem__input --input-radio" value="extreme"
-                                v-model="priorityTask">
+                            <input type="radio" name="priority" id="extreme" class="task-form-elem__input --input-radio"
+                                value="extreme" v-model="priorityTask">
                             <label class="label-priority" for="extreme">
                                 <div class="circle-priority" data-priority="extreme"></div>
                                 <span>Макс. приоритет</span>
                             </label>
                         </div>
                         <div class="priority-input-wrapper">
-                            <input type="radio" name="priority" id="medium" class="task-form-elem__input --input-radio" value="medium"
-                                v-model="priorityTask">
+                            <input type="radio" name="priority" id="medium" class="task-form-elem__input --input-radio"
+                                value="medium" v-model="priorityTask">
                             <label class="label-priority" for="medium">
                                 <div class="circle-priority" data-priority="medium"></div>
                                 <span>Умеренный</span>
                             </label>
                         </div>
                         <div class="priority-input-wrapper">
-                            <input type="radio" name="priority" id="low" class="task-form-elem__input --input-radio" value="low"
-                                v-model="priorityTask" checked>
+                            <input type="radio" name="priority" id="low" class="task-form-elem__input --input-radio"
+                                value="low" v-model="priorityTask" checked>
                             <label class="label-priority" for="low">
                                 <div class="circle-priority" data-priority="low"></div>
                                 <span>Второстепенный</span>
@@ -128,66 +129,89 @@ function callAlert(title: string) {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .create-task-form {
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 2rem 1rem 1rem;
-    gap: 2rem
-}
-
-.task-form-elem {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.create-task-form__hor-elem {
-    display: flex;
-    gap: 4rem;
-}
-
-.create-task-form__vert-elem {
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
+
+    .task-form-elem {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &__input-title {
+            font-weight: 600;
+            transition: all 300ms;
+        }
+
+        .priority-input-wrapper {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 0.5rem;
+
+            .label-priority {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+
+                .circle-priority {
+                    border-radius: 50%;
+                    width: 12px;
+                    height: 12px;
+
+                    &[data-priority="extreme"] {
+                        background-color: map-get($colors, 'red');
+                    }
+
+                    &[data-priority="medium"] {
+                        background-color: map-get($colors, 'light-blue');
+                    }
+
+                    &[data-priority="low"] {
+                        background-color: map-get($colors, 'green');
+                    }
+                }
+            }
+        }
+
+        .create-task__area {
+            height: 15rem;
+            padding: 1rem;
+            resize: none;
+            border: 1px solid map-get($colors, 'light-grey');
+            border-radius: 0.5rem;
+        }
+
+        .input-file__desc {
+            position: absolute;
+            width: 205px;
+            max-height: 40px;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: map-get($colors, 'light-grey');
+            text-align: center;
+            word-break: break-all;
+            overflow: hidden;
+            z-index: -1;
+        }
+    }
+
+    &__hor-elem {
+        display: flex;
+        gap: 4rem;
+    }
+
+    &__vert-elem {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 
-.task-form-elem__input-title {
-    font-weight: 600;
-    transition: all 300ms;
-}
-
-.priority-input-wrapper {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 0.5rem;
-}
-
-.label-priority {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-.circle-priority {
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-}
-
-.circle-priority[data-priority="extreme"] {
-    background-color: var(--red);
-}
-
-.circle-priority[data-priority="medium"] {
-    background-color: var(--light-blue);
-}
-
-.circle-priority[data-priority="low"] {
-    background-color: var(--green);
-}
 
 .--input-radio[type="radio"] {
     appearance: none;
@@ -198,22 +222,15 @@ function callAlert(title: string) {
     transform: scale(1) rotate(0deg);
     transition: all 350ms ease;
     cursor: pointer;
+
+    &:checked {
+        background-color: map-get($colors, 'pink');
+        border: 1px solid map-get($colors, 'pink');
+        border-radius: 50%;
+        transform: scale(1.2) rotate(180deg);
+    }
 }
 
-.--input-radio[type="radio"]:checked {
-    background-color: var(--pink);
-    border: 1px solid var(--pink);
-    border-radius: 50%;
-    transform: scale(1.2) rotate(180deg);
-}
-
-.create-task__area {
-    height: 15rem;
-    padding: 1rem;
-    resize: none;
-    border: 1px solid var(--light-grey);
-    border-radius: 0.5rem;
-}
 
 .task-form-elem__input[type="file"] {
     position: relative;
@@ -225,40 +242,26 @@ function callAlert(title: string) {
     background-size: 25%;
     color: transparent;
     cursor: pointer;
-}
 
-.task-form-elem__input[type="file"]::-webkit-file-upload-button {
-    appearance: none;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    height: fit-content;
-    padding: 0.5rem 1rem;
-    color: var(--light-grey);
-    background-color: transparent;
-    font-weight: 500;
-    border: 1px solid var(--light-grey);
-    border-radius: 0.5rem;
-    cursor: pointer;
+    &::-webkit-file-upload-button {
+        appearance: none;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: fit-content;
+        padding: 0.5rem 1rem;
+        color: map-get($colors, 'light-grey');
+        background-color: transparent;
+        font-weight: 500;
+        border: 1px solid map-get($colors, 'light-grey');
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
 }
 
 .relative {
     position: relative;
-}
-
-.input-file__desc {
-    position: absolute;
-    width: 205px;
-    max-height: 40px;
-    top: 62%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--light-grey);
-    text-align: center;
-    word-break: break-all;
-    overflow: hidden;
-    z-index: -1;
 }
 
 .--form-btn {

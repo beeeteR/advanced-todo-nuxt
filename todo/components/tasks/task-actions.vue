@@ -58,7 +58,7 @@ onMounted(() => {
 <template>
     <div @mouseenter="startTimer" @mouseleave="resetTimer">
         <div ref="taskActionsEl" class="task-actions" :class="{ '--task-actions-icon': props.view === 'icon' }">
-            <div class="task-action__btn" @click="toggleStateTaskActions">
+            <div class="task-actions__btn" @click="toggleStateTaskActions">
                 <div class="task-actions__icon" v-if="props.view === 'icon'">
                     <img src="../assets/img/pages/edit-icon.svg" alt="">
                 </div>
@@ -73,7 +73,8 @@ onMounted(() => {
                     <li class="actions-elem" @click="todoStore.changeTastVital(props.taskId)">{{
                         computedHtmlText.actionVital }}</li>
                     <li class="actions-elem">Изменить</li>
-                    <li class="actions-elem" @click="todoStore.delTaskById(props.taskId)" v-if="props.isTaskPage">Удалить</li>
+                    <li class="actions-elem" @click="todoStore.delTaskById(props.taskId)" v-if="props.isTaskPage">
+                        Удалить</li>
                     <li class="actions-elem" @click="todoStore.changeStateTask(task!.state + 1, props.taskId)"
                         v-if="EStateTask.finished != task?.state">{{ computedHtmlText.actionState }}</li>
                 </ul>
@@ -82,85 +83,89 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .task-actions {
     position: relative;
     width: fit-content;
     height: fit-content;
     display: flex;
     flex-direction: column;
-}
 
-.task-action__btn {
-    align-self: flex-end;
-    cursor: pointer;
-}
+    &.--task-actions-icon {
+        flex-direction: column-reverse;
 
-.actions-element {
-    display: flex;
-    gap: 0.25rem;
-    cursor: pointer;
-}
+        .actions-wrapper {
+            flex-direction: column;
+            margin-top: unset;
+            margin-bottom: 1rem;
+            transform-origin: bottom right;
+        }
+    }
 
-.actions-element__decor {
-    width: 8px;
-    aspect-ratio: 1;
-    border: 1px solid var(--light-grey);
-    border-radius: 50%;
-    transition: all 200ms;
-}
+    &__btn {
+        align-self: flex-end;
+        cursor: pointer;
+    }
 
-.actions-element:hover .actions-element__decor {
-    background-color: var(--light-blue);
-    border-color: var(--light-blue);
-}
+    .actions {
+        &-element {
+            display: flex;
+            gap: 0.25rem;
+            cursor: pointer;
 
-.actions-wrapper {
-    margin-top: 1rem;
-    transform: scale(0);
-    transform-origin: top right;
-    padding: 1rem;
-    background-color: white;
-    border: 1px solid var(--light-blue);
-    border-radius: 0.5rem;
-    transition: all 300ms;
-    z-index: 10;
-}
+            &:hover {
+                .actions-element__decor {
+                    background-color: map-get($colors, 'light-blue');
+                    border-color: map-get($colors, 'light-blue');
+                }
+            }
 
-.actions-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+            &__decor {
+                width: 8px;
+                aspect-ratio: 1;
+                border: 1px solid map-get($colors, 'light-grey');
+                border-radius: 50%;
+                transition: all 200ms;
+            }
+        }
 
-.actions-elem {
-    position: relative;
-    font-size: 14px;
-    font-weight: 400;
-    padding-bottom: 2px;
-    width: fit-content;
-    transform: translateX(0px);
-    cursor: pointer;
-    user-select: none;
-    transition: all 300ms;
-}
+        &-wrapper {
+            margin-top: 1rem;
+            transform: scale(0);
+            transform-origin: top right;
+            padding: 1rem;
+            background-color: white;
+            border: 1px solid map-get($colors, 'light-blue');
+            border-radius: 0.5rem;
+            transition: all 300ms;
+            z-index: 10;
 
-.actions-elem:hover {
-    transform: translateX(10px);
-}
+            &.--actions-open {
+                transform: scale(1);
+            }
+        }
 
-.--actions-open {
-    transform: scale(1);
-}
+        &-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-.--task-actions-icon {
-    flex-direction: column-reverse;
-}
+        &-elem {
+            position: relative;
+            font-size: 14px;
+            font-weight: 400;
+            padding-bottom: 2px;
+            width: fit-content;
+            transform: translateX(0px);
+            cursor: pointer;
+            user-select: none;
+            transition: all 300ms;
 
-.--task-actions-icon .actions-wrapper {
-    flex-direction: column;
-    margin-top: unset;
-    margin-bottom: 1rem;
-    transform-origin: bottom right;
+            &:hover {
+                transform: translateX(10px);
+            }
+        }
+    }
 }
 </style>

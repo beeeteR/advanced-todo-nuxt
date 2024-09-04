@@ -58,7 +58,7 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .task-card {
     position: relative;
     display: flex;
@@ -66,88 +66,94 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
     gap: 1rem;
     justify-content: space-between;
     margin-top: 1.5rem;
-    border: 1px solid var(--light-grey);
+    border: 1px solid map-get($colors, 'light-grey');
     border-radius: 0.5rem;
     padding: 0.5rem 1rem 0.5rem 3rem;
     cursor: pointer;
     transition: background-color 300ms;
+
+    &__decor-circle {
+        position: absolute;
+        top: 0.5rem;
+        left: 1rem;
+        width: 12px;
+        aspect-ratio: 1;
+        background-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 50%;
+        transition: all 400ms;
+    }
+
+    &:hover {
+        .task-card__decor-circle {
+            transform: scale(1.3);
+        }
+
+        .--border-red {
+            background-color: map-get($colors, 'red');
+        }
+
+        .--border-blue {
+            background-color: map-get($colors, 'blue');
+        }
+
+        .--border-green {
+            background-color: map-get($colors, 'green');
+        }
+    }
+
+    .task {
+        &__title {
+            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        &__body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: map-get($colors, 'light-grey');
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__short-info {
+            display: flex;
+            align-self: flex-end;
+            gap: 1rem;
+
+            p {
+                font-size: 12px;
+                font-weight: 300;
+            }
+        }
+
+        &-dates {
+            color: map-get($colors, 'light-grey');
+            font-size: 12px;
+            font-weight: 300;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+    }
 }
 
 .--selected-task-card {
-    background-color: rgba(161, 163, 171, 0.2);
+    background-color: rgba(161, 163, 171, 0.2) !important;
 }
 
-.task-card__decor-circle {
-    position: absolute;
-    top: 0.5rem;
-    left: 1rem;
-    width: 12px;
-    aspect-ratio: 1;
-    background-color: transparent;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 50%;
-    transition: all 400ms;
-}
-
-.task-card:hover .task-card__decor-circle {
-    transform: scale(1.3);
-}
-
-.task-card:hover .--border-red {
-    background-color: var(--red);
-}
-
-.task-card:hover .--border-blue {
-    background-color: var(--blue);
-}
-
-.task-card:hover .--border-green {
-    background-color: var(--green);
-}
-
-.task__title {
-    font-weight: 600;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.task__body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.task__desc {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--light-grey);
-}
-
-.task__footer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.task__short-info {
-    display: flex;
-    align-self: flex-end;
-    gap: 1rem;
-}
-
-.task__short-info p,
-.task-dates {
-    font-size: 12px;
-    font-weight: 300;
-}
-
-.task-dates {
-    color: var(--light-grey);
-}
-
-.task-card__actions {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-}
 </style>

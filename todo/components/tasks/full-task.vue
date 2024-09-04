@@ -58,64 +58,67 @@ function applyChanges() {
             </p>
         </div>
         <div class="task__footer">
-            <tasks-task-actions :taskId="props.task.id" :view="'icon'" class="task-card__actions" />
-            <button class="footer__btns-btn" @click="changeAlertState(true)"><img src="../assets/img/pages/delete-icon.svg"
-                alt="delete"></button>
+            <tasks-task-actions :taskId="props.task.id" :view="'icon'" class="task__actions" />
+            <button class="footer__btns-btn" @click="changeAlertState(true)"><img
+                    src="~/assets/img/pages/delete-icon.svg" alt="delete"></button>
         </div>
-        <popups-alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true" whatCanceled="delete"
-        @cancelChanges="changeAlertState(false)" @applyChanges="applyChanges"/>
+        <popups-alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true"
+            whatCanceled="delete" @cancelChanges="changeAlertState(false)" @applyChanges="applyChanges" />
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .full-card {
     margin-top: 0;
     padding: 0;
     height: 100%;
     border: none;
     cursor: auto;
+
+    .task {
+        &__header {
+            gap: 1rem;
+
+            img {
+                height: 100%;
+                max-height: 160px;
+                aspect-ratio: 1;
+            }
+        }
+
+        &__short-info {
+            flex-direction: column;
+
+            p {
+                font-size: 14px;
+            }
+        }
+
+        &__title {
+            font-size: 1.25rem;
+        }
+
+        &__body {
+            flex-grow: 1;
+        }
+
+        &__desc {
+            font-size: 1rem;
+            height: 100%;
+        }
+
+        &__footer {
+            position: relative;
+            min-height: 50px;
+            justify-content: flex-end;
+        }
+
+        &-card__actions {
+            top: unset;
+            bottom: 0;
+            right: 3rem;
+        }
+    }
 }
 
-.full-card .task__header {
-    gap: 1rem;
-}
-
-.full-card .task__header .task__short-info {
-    flex-direction: column;
-}
-
-.full-card .task__header .task__short-info p {
-    font-size: 14px;
-}
-
-.full-card .task__title {
-    font-size: 1.25rem;
-}
-
-.full-card .task__header img {
-    height: 100%;
-    max-height: 160px;
-    aspect-ratio: 1;
-}
-
-.full-card .task__body {
-    flex-grow: 1;
-}
-
-.full-card .task__body .task__desc {
-    font-size: 1rem;
-    height: 100%;
-}
-
-.full-card .task__footer {
-    position: relative;
-    min-height: 50px;
-    justify-content: flex-end;
-}
-
-.full-card .task-card__actions {
-    top: unset;
-    bottom: 0;
-    right: 3rem;
-}
 </style>

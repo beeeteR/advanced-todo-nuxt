@@ -76,12 +76,13 @@ function goToTheTaskPage(taskId: number) {
                 </div>
             </div>
             <div class="dashboard__tasks-by-date">
-                <tasks-task-item v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id" :task="task" @cardSelected="goToTheTaskPage(task.id)" />
+                <tasks-task-item v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id"
+                    :task="task" @cardSelected="goToTheTaskPage(task.id)" />
             </div>
             <div class="dashboard__vital-tasks-by-date" v-if="neededToThisComponentTasks.vitalBySelectedDate.length">
                 <span class="dashboard__tasks-separator"></span>
-                <tasks-task-item v-for="(task) in neededToThisComponentTasks.vitalBySelectedDate" :key="task.id" :task="task"
-                    @cardSelected="goToTheTaskPage(task.id)" />
+                <tasks-task-item v-for="(task) in neededToThisComponentTasks.vitalBySelectedDate" :key="task.id"
+                    :task="task" @cardSelected="goToTheTaskPage(task.id)" />
             </div>
         </div>
         <div class="dashboard__info">
@@ -104,106 +105,113 @@ function goToTheTaskPage(taskId: number) {
     </div>
 </template>
 
-<style>
+<style lang="scss">
 .dashboard {
     display: flex;
     gap: 1rem;
+
+    &__tasks,
+    &__info,
+    &__info__status,
+    &__info__completed {
+        border: none;
+    }
+
+    &__tasks,
+    &__info {
+        flex-grow: 1;
+    }
+
+    &__tasks,
+    &__tasks-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__tasks {
+        &__pre-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-header__title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        &-header__btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 1rem;
+            outline: 1px solid white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 300ms;
+
+            &:hover {
+                background-color: map-get($colors, 'pink');
+
+                span {
+                    color: white !important;
+                }
+            }
+
+            span {
+                transition: all 300ms 150ms;
+
+                &:first-child {
+                    font-size: 1.8rem;
+                    font-weight: 300;
+                    color: map-get($colors, 'pink');
+                }
+
+                &:last-child {
+                    color: map-get($colors, 'light-grey');
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &-date {
+            font-size: 14px;
+
+            span {
+                &:last-child {
+                    color: map-get($colors, 'light-grey');
+                    padding-left: 1rem;
+                }
+            }
+        }
+
+        &-separator {
+            display: block;
+            width: 100%;
+            height: 1px;
+            margin: 2rem 0 3rem 0;
+            background-color: map-get($colors, 'light-grey');
+        }
+    }
+
+    &__title {
+        h1 {
+            color: map-get($colors, 'pink');
+            font-weight: 500;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &__completed {
+            padding-bottom: 1rem;
+        }
+    }
 }
 
-.dashboard__tasks,
-.dashboard__info {
-    width: 50%;
-}
-
-.dashboard__tasks,
-.dashboard__info,
-.dashboard__info__status,
-.dashboard__info__completed {
-    border: none;
-}
-
-.dashboard__tasks,
-.dashboard__tasks-header {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.dashboard__tasks__pre-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.dashboard__tasks-header__title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.dashboard__title h1 {
-    color: var(--pink);
-    font-weight: 500;
-}
-
-.dashboard__tasks-header__btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem 1rem;
-    outline: 1px solid white;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 300ms;
-}
-
-.dashboard__tasks-header__btn:hover {
-    background-color: var(--pink);
-}
-
-.dashboard__tasks-header__btn span {
-    transition: all 300ms 150ms;
-}
-
-.dashboard__tasks-header__btn span:first-child {
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: var(--pink);
-}
-
-.dashboard__tasks-header__btn span:last-child {
-    color: var(--light-grey);
-    font-weight: 400;
-}
-
-.dashboard__tasks-header__btn:hover span {
-    color: white;
-}
-
-.dashboard__tasks-date {
-    font-size: 14px;
-}
-
-.dashboard__tasks-date span:last-child {
-    color: var(--light-grey);
-    padding-left: 1rem;
-}
-
-.dashboard__tasks-separator {
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin: 2rem 0 3rem 0;
-    background-color: var(--light-grey);
-}
-
-.dashboard__info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem
-}
-
-.dashboard__info__completed .dashboard__tasks-header__title {
-    padding-bottom: 1rem;
-}
 </style>

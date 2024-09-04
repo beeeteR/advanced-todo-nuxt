@@ -31,11 +31,17 @@ export default defineNuxtConfig({
     }
   ],
   css: [
-    '~/assets/css/colors.css',
-    '~/assets/css/nullalble.css',
-    '~/assets/css/basic.css',
-    '~/assets/css/modifiers.css'
+    '~/assets/style/main.scss',
   ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/style/additional.scss" as *;',
+        },
+      },
+    },
+  },
   modules: ["@pinia/nuxt"],
   imports: {
     dirs: [

@@ -19,7 +19,7 @@ function taskDeleted() {
     <div class="tasks --border-wrapper">
       <div class="tasks__header">
         <common-page-title title="Мои задачи" />
-        <tasks-tasks-sort />
+        <tasks-sort-menu />
       </div>
       <div class="tasks__body">
         <tasks-task-item v-for="item in tasks" :key="item.id" :task="item" :isSelect="selectedTaskId === item.id"
@@ -32,31 +32,29 @@ function taskDeleted() {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .my-tasks-page {
   display: flex;
   gap: 1rem;
-}
 
-.my-tasks-page .tasks {
-  flex-grow: 1;
-}
+  .tasks {
+    flex-grow: 1;
 
-.tasks__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.tasks__settings {}
+    &__body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-.tasks__body {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.selected-task {
-  width: 50%;
+    .selected-task {
+      width: 50%;
+    }
+  }
 }
 </style>
