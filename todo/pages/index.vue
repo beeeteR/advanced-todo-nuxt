@@ -59,12 +59,12 @@ function goToTheTaskPage(taskId: number) {
                 <div class="dashboard__tasks__pre-title">
                     <div class="dashboard__tasks-header__title">
                         <img src="../assets/img/pages/Pending.svg" alt="">
-                        <PageTitle :title="'To-Do'" class="dashboard__title" />
+                        <common-page-title :title="'To-Do'" class="dashboard__title" />
                     </div>
-                    <NuxtLink :to="'/create-task'" class="dashboard__tasks-header__btn">
+                    <nuxt-link :to="'/create-task'" class="dashboard__tasks-header__btn">
                         <span>+</span>
                         <span>Добавить задачу</span>
-                    </NuxtLink>
+                    </nuxt-link>
                 </div>
                 <div class="dashboard__tasks-date">
                     <span>
@@ -76,11 +76,11 @@ function goToTheTaskPage(taskId: number) {
                 </div>
             </div>
             <div class="dashboard__tasks-by-date">
-                <Task v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id" :task="task" @cardSelected="goToTheTaskPage(task.id)" />
+                <tasks-task-item v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id" :task="task" @cardSelected="goToTheTaskPage(task.id)" />
             </div>
             <div class="dashboard__vital-tasks-by-date" v-if="neededToThisComponentTasks.vitalBySelectedDate.length">
                 <span class="dashboard__tasks-separator"></span>
-                <Task v-for="(task) in neededToThisComponentTasks.vitalBySelectedDate" :key="task.id" :task="task"
+                <tasks-task-item v-for="(task) in neededToThisComponentTasks.vitalBySelectedDate" :key="task.id" :task="task"
                     @cardSelected="goToTheTaskPage(task.id)" />
             </div>
         </div>
@@ -88,16 +88,16 @@ function goToTheTaskPage(taskId: number) {
             <div class="dashboard__info__status --border-wrapper">
                 <div class="dashboard__tasks-header__title">
                     <img src="../assets/img/pages/status.svg" alt="">
-                    <PageTitle title="Общий статус" class="dashboard__title" />
+                    <common-page-title title="Общий статус" class="dashboard__title" />
                 </div>
-                <GeneralStatus />
+                <ui-general-status />
             </div>
             <div class="dashboard__info__completed --border-wrapper" v-if="neededToThisComponentTasks.completed.length">
                 <div class="dashboard__tasks-header__title">
                     <img src="../assets/img/pages/completed.svg" alt="">
-                    <PageTitle :title="'Выполненные задачи'" class="dashboard__title" />
+                    <common-page-title :title="'Выполненные задачи'" class="dashboard__title" />
                 </div>
-                <Task v-for="(task) in neededToThisComponentTasks.completed" :key="task.id" :task="task"
+                <tasks-task-item v-for="(task) in neededToThisComponentTasks.completed" :key="task.id" :task="task"
                     @click="goToTheTaskPage(task.id)" />
             </div>
         </div>

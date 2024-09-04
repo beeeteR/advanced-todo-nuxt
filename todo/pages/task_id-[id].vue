@@ -33,8 +33,8 @@ function applyChanges() {
             <img :src="task.file?.name" alt="" v-if="task.file">
             <div class="header__short-info">
                 <h2 class="short-info__task-name">{{ task.name }}</h2>
-                <TaskPriority class="short-info__task-priority" :priority="task.priority" />
-                <TaskState class="short-info__task-state" :state=task.state />
+                <tasks-task-priority class="short-info__task-priority" :priority="task.priority" />
+                <tasks-task-state class="short-info__task-state" :state=task.state />
                 <div class="short-info__task-dates">
                     <p class="task-dates__create">Дата создания: {{ getTextFormatDate(task.creationDateTimestamp) }}</p>
                     <p class="task-dates__end">Дата окончания: {{ getTextFormatDate(task.endDateTimespamp) }}</p>
@@ -47,13 +47,13 @@ function applyChanges() {
         </div>
         <div class="task-page__footer">
             <div class="footer__btns">
-                <TaskActions class="footer__btns-btn" :taskId="taskId" view="icon" />
+                <tasks-task-actions class="footer__btns-btn" :taskId="taskId" view="icon" />
                 <button class="footer__btns-btn" @click="deleteTask"><img src="../assets/img/pages/delete-icon.svg"
                         alt="delete"></button>
             </div>
         </div>
     </div>
-    <Alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true" whatCanceled="delete"
+    <popups-alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true" whatCanceled="delete"
         @cancelChanges="alertClosed" @applyChanges="applyChanges"/>
 </template>
 

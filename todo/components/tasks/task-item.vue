@@ -36,7 +36,7 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
             '--border-blue': EStateTask.started === props.task.state,
             '--border-green': EStateTask.finished === props.task.state,
         }"></div>
-        <TaskActions :taskId="props.task.id" :view="'element'" class="task-card__actions"
+        <tasks-task-actions :taskId="props.task.id" :view="'element'" class="task-card__actions"
             @sendElementTaskActions="getElementTaskActions" />
         <div class="task__header">
             <h3 class="task__title">{{ props.task.name }}</h3>
@@ -47,8 +47,8 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
         </div>
         <div class="task__footer">
             <div class="task__short-info">
-                <TaskPriority :priority="props.task.priority" />
-                <TaskState :state="props.task.state" />
+                <tasks-task-priority :priority="props.task.priority" />
+                <tasks-task-state :state="props.task.state" />
             </div>
             <div class="task-dates">
                 <p class="task-dates__date">Дата создания: {{ computedHtmlText.textFormatDate.create }}</p>

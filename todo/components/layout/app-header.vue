@@ -31,24 +31,24 @@ function changingDate(timestamp: number) {
 
 <template>
     <div class="header__content">
-        <NuxtLink to="/" class="logo">
+        <nuxt-link to="/" class="logo">
             <span>To</span>
             <span>-Do</span>
-        </NuxtLink>
+        </nuxt-link>
         <div class="search">
             <input type="text" class="search__input" placeholder="Найдите свою задачу здесь...">
             <button class="search__btn">
-                <img src="../assets/img/header/SearchICon.svg" alt="">
+                <img src="~/assets/img/header/SearchICon.svg" alt="">
             </button>
         </div>
         <div class="header__info">
             <div class="header__btns">
                 <div class="btn-img">
-                    <img src="../assets/img/header/Notifications.svg" alt="">
+                    <img src="~/assets/img/header/Notifications.svg" alt="">
                 </div>
                 <div class="btn-img">
-                    <img class="btn__img-datetime" src="../assets/img/header/Cal.svg" alt="">
-                    <InputDate class="btn__input-datetime" @changeDate="changingDate" />
+                    <img class="btn__img-datetime" src="~/assets/img/header/Cal.svg" alt="">
+                    <common-input-date class="btn__input-datetime" @changeDate="changingDate" />
                 </div>
             </div>
             <div class="header__this-day">

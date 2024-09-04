@@ -78,7 +78,7 @@ function callAlert(title: string) {
                 </div>
                 <div class="task-form-elem">
                     <p class="task-form-elem__input-title">Дата окончания</p>
-                    <InputDate class="task-form-elem__input" @changeDate="changeDate" />
+                    <common-input-date class="task-form-elem__input" @changeDate="changeDate" />
                 </div>
                 <div class="task-form-elem">
                     <p class="task-form-elem__input-title">Приоритет</p>
@@ -124,7 +124,7 @@ function callAlert(title: string) {
             </div>
             <button class="btn --form-btn" @click.prevent="addNewTask">Создать задачу</button>
         </form>
-        <Alert :title="alertText" :state="alertState" @alertClosed="alertState = false" />
+        <popups-alert :title="alertText" :state="alertState" @alertClosed="alertState = false" />
     </div>
 </template>
 

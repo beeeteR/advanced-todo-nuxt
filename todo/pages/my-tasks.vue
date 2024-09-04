@@ -18,16 +18,16 @@ function taskDeleted() {
   <div class="my-tasks-page">
     <div class="tasks --border-wrapper">
       <div class="tasks__header">
-        <PageTitle title="Мои задачи" />
-        <TasksSort />
+        <common-page-title title="Мои задачи" />
+        <tasks-tasks-sort />
       </div>
       <div class="tasks__body">
-        <Task v-for="item in tasks" :key="item.id" :task="item" :isSelect="selectedTaskId === item.id"
+        <tasks-task-item v-for="item in tasks" :key="item.id" :task="item" :isSelect="selectedTaskId === item.id"
           @cardSelected="changeSelectedCard" />
       </div>
     </div>
     <div class="selected-task --border-wrapper" v-show="selectedTaskId != -1">
-      <FullTask :task="(todoStore.getTaskById(selectedTaskId) as ITask)" @taskDeleted="taskDeleted" />
+      <tasks-full-task :task="(todoStore.getTaskById(selectedTaskId) as ITask)" @taskDeleted="taskDeleted" />
     </div>
   </div>
 </template>

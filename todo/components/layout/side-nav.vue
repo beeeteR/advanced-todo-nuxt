@@ -7,26 +7,26 @@ const route = ref(useRoute())
 <template>
     <div class="side-nav">
         <div class="nav__links">
-            <NuxtLink to="/" class="nav__link" :class="{'--link-active': route.name === 'index'}">
-                <img class="nav__link-img" src="../assets/img/side-nav/dashboard.svg"></img>
+            <nuxt-link to="/" class="nav__link" :class="{'--link-active': route.name === 'index'}">
+                <img class="nav__link-img" src="~/assets/img/side-nav/dashboard.svg"></img>
                 <p class="nav__link-title">Главная</p>
-            </NuxtLink>
-            <NuxtLink to="/create-task" class="nav__link" :class="{'--link-active': route.name === 'create-task'}">
-                <img class="nav__link-img" src="../assets/img/side-nav/add-task.svg"></img>
+            </nuxt-link>
+            <nuxt-link to="/create-task" class="nav__link" :class="{'--link-active': route.name === 'create-task'}">
+                <img class="nav__link-img" src="~/assets/img/side-nav/add-task.svg"></img>
                 <p class="nav__link-title">Создать задачу</p>
-            </NuxtLink>
-            <NuxtLink to="/my-tasks" class="nav__link" :class="{'--link-active': route.name === 'my-tasks'}">
-                <img class="nav__link-img" src="../assets/img/side-nav/my-task.svg"></img>
+            </nuxt-link>
+            <nuxt-link to="/my-tasks" class="nav__link" :class="{'--link-active': route.name === 'my-tasks'}">
+                <img class="nav__link-img" src="~/assets/img/side-nav/my-task.svg"></img>
                 <p class="nav__link-title">Мои задачи</p>
-            </NuxtLink>
-            <NuxtLink to="/vital-tasks" class="nav__link" :class="{'--link-active': route.name === 'vital-tasks'}">
-                <img class="nav__link-img" src="../assets/img/side-nav/vital.svg"></img>
+            </nuxt-link>
+            <nuxt-link to="/vital-tasks" class="nav__link" :class="{'--link-active': route.name === 'vital-tasks'}">
+                <img class="nav__link-img" src="~/assets/img/side-nav/vital.svg"></img>
                 <p class="nav__link-title">Важные задачи</p>
-            </NuxtLink>
-            <NuxtLink to="/params" class="nav__link" :class="{'--link-active': route.name === 'params'}">
-                <img class="nav__link-img" src="../assets/img/side-nav/settings.svg"></img>
+            </nuxt-link>
+            <nuxt-link to="/params" class="nav__link" :class="{'--link-active': route.name === 'params'}">
+                <img class="nav__link-img" src="~/assets/img/side-nav/settings.svg"></img>
                 <p class="nav__link-title">Настройки</p>
-            </NuxtLink>
+            </nuxt-link>
         </div>
     </div>
 </template>

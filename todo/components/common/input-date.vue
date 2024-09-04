@@ -55,7 +55,7 @@ watch(selectedDateTimestamp, () => emits("changeDate", selectedDateTimestamp.val
   appearance: none;
   width: 24px;
   height: 24px;
-  background-image: url(../assets/img/pages/input-date.svg);
+  background-image: url(~/assets/img/pages/input-date.svg);
   background-repeat: no-repeat;
   transform: scale(0.9);
   cursor: pointer;

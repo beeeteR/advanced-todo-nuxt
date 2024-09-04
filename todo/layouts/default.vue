@@ -18,13 +18,13 @@ onMounted(() => {
 
 <template>
     <div class="app">
-        <AppHeader />
+        <layout-app-header />
         <div class="wrapper">
             <div class="content-layout">
                 <slot></slot>
             </div>
         </div>
-        <SideNav />
+        <layout-side-nav />
     </div>
 </template>
 

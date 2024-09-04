@@ -15,14 +15,14 @@ const createdTasksCount = computed(() => {
 </script>
 
 <template>
-    <div class="general__status">
-        <StatusCircle :color="'green'" :percent="allTasks.length != 0 && completedTasksCount != 0 ?
+    <div class="general__status" v-if="allTasks.length">
+        <ui-status-circle :color="'green'" :percent="allTasks.length != 0 && completedTasksCount != 0 ?
             Math.floor((completedTasksCount * 100) / allTasks.length) : 0" title="Завершено" />
-        <StatusCircle :color="'blue'" :percent="allTasks.length != 0 && startedTasksCount != 0
+        <ui-status-circle :color="'blue'" :percent="allTasks.length != 0 && startedTasksCount != 0
             ? Math.floor((startedTasksCount * 100) / allTasks.length)
             : 0
             " title="В процессе" />
-        <StatusCircle :color="'red'" :percent="allTasks.length != 0 && createdTasksCount != 0
+        <ui-status-circle :color="'red'" :percent="allTasks.length != 0 && createdTasksCount != 0
             ? Math.floor((createdTasksCount * 100) / allTasks.length)
             : 0
             " title="Не начато" />

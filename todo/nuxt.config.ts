@@ -2,7 +2,40 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  css: ['~/assets/css/colors.css', '~/assets/css/nullalble.css', '~/assets/css/basic.css', '~/assets/css/modifiers.css'],
+  components: [
+    '~/components',
+    {
+      path: '~/components/common',
+      pathPrefix: true,
+      prefix: 'common',
+    },
+    {
+      path: '~/components/ui',
+      pathPrefix: true,
+      prefix: 'ui',
+    },
+    {
+      path: '~/components/layout',
+      pathPrefix: true,
+      prefix: 'layout',
+    },
+    {
+      path: '~/components/popups',
+      pathPrefix: true,
+      prefix: 'popups',
+    },
+    {
+      path: '~/components/tasks',
+      pathPrefix: true,
+      prefix: 'tasks',
+    }
+  ],
+  css: [
+    '~/assets/css/colors.css',
+    '~/assets/css/nullalble.css',
+    '~/assets/css/basic.css',
+    '~/assets/css/modifiers.css'
+  ],
   modules: ["@pinia/nuxt"],
   imports: {
     dirs: [

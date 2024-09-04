@@ -58,11 +58,11 @@ function applyChanges() {
             </p>
         </div>
         <div class="task__footer">
-            <TaskActions :taskId="props.task.id" :view="'icon'" class="task-card__actions" />
+            <tasks-task-actions :taskId="props.task.id" :view="'icon'" class="task-card__actions" />
             <button class="footer__btns-btn" @click="changeAlertState(true)"><img src="../assets/img/pages/delete-icon.svg"
                 alt="delete"></button>
         </div>
-        <Alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true" whatCanceled="delete"
+        <popups-alert :state="alertState" :title="`Удаляю задачу <${task?.name}>`" :withOpportunityCancel="true" whatCanceled="delete"
         @cancelChanges="changeAlertState(false)" @applyChanges="applyChanges"/>
     </div>
 </template>

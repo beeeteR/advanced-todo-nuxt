@@ -14,9 +14,9 @@ function changeSelectedCard(taskId: number) {
 <template>
   <div class="my-tasks-page">
     <div class="tasks --border-wrapper">
-      <PageTitle :title="'Важные задачи'" />
+      <common-page-title :title="'Важные задачи'" />
       <div class="tasks__cards">
-        <Task
+        <tasks-task-item
           v-for="item in tasks"
           :key="item.id"
           :task="item"
@@ -26,7 +26,7 @@ function changeSelectedCard(taskId: number) {
       </div>
     </div>
     <div class="selected-task --border-wrapper" v-show="selectedTaskId != -1">
-      <FullTask :task="(todoStore.getTaskById(selectedTaskId) as ITask)" />
+      <tasks-full-task :task="(todoStore.getTaskById(selectedTaskId) as ITask)" />
     </div>
   </div>
 </template>

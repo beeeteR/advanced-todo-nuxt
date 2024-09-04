@@ -5,8 +5,8 @@
 
 <template>
     <div class="create-task__content --border-wrapper">
-        <PageTitle title="Создать новую задачу" />
-        <TaskForm />
+        <common-page-title title="Создать новую задачу" />
+        <tasks-task-form />
     </div>
 </template>
 
