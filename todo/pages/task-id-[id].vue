@@ -131,12 +131,13 @@ function applyChanges() {
                 display: flex;
                 justify-content: flex-end;
                 gap: 1rem;
+
+                &-btn {
+                    align-self: flex-end;
+                    height: fit-content;
+                }
             }
 
-            &-btn {
-                align-self: flex-end;
-
-            }
         }
     }
 }

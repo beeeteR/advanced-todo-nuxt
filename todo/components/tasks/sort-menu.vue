@@ -50,7 +50,10 @@ watch(sortBy, () => {
     gap: 0.5rem;
 
     .sort {
-        &__title {}
+        &__title {
+            font-size: 18px;
+            font-weight: 600;
+        }
 
         &__list {
             display: flex;

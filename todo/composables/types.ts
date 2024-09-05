@@ -3,10 +3,21 @@ export enum EStateTask {
     started = 2,
     finished = 3
 }
+export enum EStateTaskRu {
+    created = 'создано',
+    started = 'начато',
+    finished = 'завершено'
+}
+
 export enum EPriorityTask {
     low = 1,
     medium = 2,
     extreme = 3
+}
+export enum EPriorityTaskRu {
+    low = 'второстепенный',
+    medium = 'умеренный',
+    extreme = 'макс. приоритет'
 }
 
 export type TDescTask = string | null
