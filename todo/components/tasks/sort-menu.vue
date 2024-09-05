@@ -1,22 +1,6 @@
 <script setup lang="ts">
 
-type TValidValueForSort = -1 | 0 | 1
-
-enum ESortType {
-    descending = -1,
-    notSorted = 0,
-    ascending = 1
-}
-
-enum EEngRuSortedNames {
-    priority = 'Приоритет',
-    state = 'Статус',
-    createDate = 'Дата создания',
-    endDate = 'Дата окончания',
-}
-type ISortBy<T> = {
-    -readonly [K in keyof T]: TValidValueForSort
-}
+import { EEngRuSortedNames, type ISortBy, type TValidValueForSort } from '~/composables/types'
 
 const sortBy = reactive<ISortBy<typeof EEngRuSortedNames>>({
     priority: 0,
@@ -36,6 +20,16 @@ function changeSortBy(key: keyof typeof EEngRuSortedNames, nowValue: ESortType) 
         sortBy[key] = ESortType.descending
     }
 }
+
+watch(sortBy, () => {
+    useRouter().push({ path: useRoute().path })
+    Object.keys(sortBy).forEach((item) => {
+        const key = item as keyof typeof EEngRuSortedNames
+        if (sortBy[key] != ESortType.notSorted) {
+            useRouter().push({ path: useRoute().path, query: { sortByKey: key, sortByValue: sortBy[key] } })
+        }
+    })
+})
 
 </script>
 <template>
@@ -60,37 +54,39 @@ function changeSortBy(key: keyof typeof EEngRuSortedNames, nowValue: ESortType) 
 
         &__list {
             display: flex;
-            gap: 0.25rem;
+            gap: 0.5rem;
         }
 
         &__item {
             display: flex;
             align-items: center;
-            margin-left: 1rem;
             user-select: none;
             cursor: pointer;
+            transition: font-size 300ms, font-weight 300ms;
 
             &.--sort {
 
                 &-ascending,
                 &-descending {
                     margin-left: 0;
+                    font-weight: 600;
+                    font-size: 1.1rem;
 
                     &::before {
                         content: "";
                         display: block;
                         height: 1rem;
                         width: 1rem;
-                        background-image: url(~/assets/img/pages/arrow-up-svgrepo-com.svg);
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        background-size: contain;
+                        background-color: map-get($colors, 'red');
+                        mask-image: url(~/assets/img/pages/arrow-up.svg);
+                        mask-size: contain;
                     }
                 }
 
                 &-ascending {
                     &::before {
                         transform: rotate(180deg);
+                        background-color: map-get($colors, 'green');
                     }
                 }
             }

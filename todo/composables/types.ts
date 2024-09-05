@@ -10,6 +10,11 @@ export enum EPriorityTask {
 }
 
 export type TDescTask = string | null
+export type TTheme = 'light' | 'dark'
+export type TValidValueForSort = -1 | 0 | 1
+export type ISortBy<T> = {
+    -readonly [K in keyof T]: TValidValueForSort
+}
 
 export interface ITask {
     id: number,
@@ -48,4 +53,17 @@ export enum typesWordDays {
     'день' = 1,
     'дня' = 3,
     'дней' = 5
+}
+
+export enum ESortType {
+    descending = -1,
+    notSorted = 0,
+    ascending = 1
+}
+
+export enum EEngRuSortedNames {
+    priority = 'Приоритет',
+    state = 'Статус',
+    createDate = 'Дата создания',
+    endDate = 'Дата окончания',
 }

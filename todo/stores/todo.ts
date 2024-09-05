@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { type ITask, type TDescTask, type EPriorityTask, EStateTask } from '../composables/types'
+import { type ITask, type TDescTask, type EPriorityTask, EStateTask, type TTheme } from '~/composables/types'
 
 export const NAME_LOCALSTORAGE = 'MyTodoTasks'
 
@@ -7,7 +7,8 @@ export const useTodoStore = defineStore('todoStore', {
     state: () => ({
         tasks: [] as ITask[],
         currentTimestamp: Date.now() as number,
-        selectedTimestamp: Date.now() as number
+        selectedTimestamp: Date.now() as number,
+        currentTheme: 'light' as TTheme
     }),
     getters: {
         // getter == computed
@@ -51,6 +52,9 @@ export const useTodoStore = defineStore('todoStore', {
         },
         getMinTimestamp: (state) => {
             return state.tasks.reduce((acc, task) => acc > task.creationDateTimestamp ? task.creationDateTimestamp : acc, Date.now() as number)
+        },
+        getCurrentTheme: (state) => {
+            return state.currentTheme
         }
     },
     actions: {
@@ -108,6 +112,9 @@ export const useTodoStore = defineStore('todoStore', {
         },
         setChoicedTimestamp(timestamp: number) {
             this.selectedTimestamp = timestamp
+        },
+        changeCurrentTheme() {
+            this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light'
         }
     }
 })

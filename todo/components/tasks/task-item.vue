@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ITask } from "../composables/types";
+import type { ITask } from "~/composables/types";
 
 const props = defineProps<{
     task: ITask;
