@@ -22,13 +22,16 @@ function changeSortBy(key: keyof typeof EEngRuSortedNames, nowValue: ESortType) 
 }
 
 watch(sortBy, () => {
-    useRouter().push({ path: useRoute().path })
-    Object.keys(sortBy).forEach((item) => {
-        const key = item as keyof typeof EEngRuSortedNames
+    const addedQueries: any = {}
+    const deleteQueries: Array<string> = ['sortByKey', 'sortByValue']
+    Object.keys(sortBy).forEach(item => {
+        const key = item as keyof ISortBy<typeof EEngRuSortedNames>
         if (sortBy[key] != ESortType.notSorted) {
-            useRouter().push({ path: useRoute().path, query: { sortByKey: key, sortByValue: sortBy[key] } })
+            addedQueries.sortByKey = key
+            addedQueries.sortByValue = sortBy[key]
         }
     })
+    changeQuery(addedQueries, deleteQueries)
 })
 
 </script>

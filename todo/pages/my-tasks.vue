@@ -2,6 +2,9 @@
 import { EEngRuSortedNames, type ITask } from '~/composables/types';
 
 const todoStore = useTodoStore();
+// const routeQueries = useRoute().query
+// console.log(routeQueries);
+
 const tasks = computed(() => {
 	const routeQueries = useRoute().query
 	if (!routeQueries.sortByKey && !routeQueries.sortByValue) return todoStore.getNonVitalTasks()

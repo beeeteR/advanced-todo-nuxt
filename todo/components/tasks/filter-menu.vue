@@ -3,34 +3,34 @@
 import { EStateTaskRu, EPriorityTaskRu, EPriorityTask, EStateTask } from "~/composables/types";
 
 interface IFilterBy {
-    creationDate: boolean,
-    endDate: boolean,
-    priority: null | EPriorityTask,
-    state: null | EStateTask
+    filterByCreationDate: boolean,
+    filterByEndDate: boolean,
+    filterByPriority: null | EPriorityTask,
+    filterByState: null | EStateTask
 }
 
 const filterBy = reactive<IFilterBy>({
-    creationDate: false,
-    endDate: false,
-    priority: null,
-    state: null
+    filterByCreationDate: false,
+    filterByEndDate: false,
+    filterByPriority: null,
+    filterByState: null
 })
 const valuesInputPriority = ref([])
 const valuesInputState = ref([])
 
-watch(() => filterBy.creationDate, (value) => {
-    if (value) filterBy.endDate = false
+watch(() => filterBy.filterByCreationDate, (value) => {
+    if (value) filterBy.filterByEndDate = false
 })
-watch(() => filterBy.endDate, (value) => {
-    if (value) filterBy.creationDate = false
+watch(() => filterBy.filterByEndDate, (value) => {
+    if (value) filterBy.filterByCreationDate = false
 })
 watch(valuesInputPriority, (newVal, oldVal) => {
     changeArrayInputStateOrPriorityFromWather('priority', newVal, oldVal)
-    filterBy.priority = valuesInputPriority.value[0] ? valuesInputPriority.value[0] : null
+    filterBy.filterByPriority = valuesInputPriority.value[0] ? valuesInputPriority.value[0] : null
 })
 watch(valuesInputState, (newVal, oldVal) => {
     changeArrayInputStateOrPriorityFromWather('state', newVal, oldVal)
-    filterBy.state = valuesInputState.value[0] ? valuesInputState.value[0] : null
+    filterBy.filterByState = valuesInputState.value[0] ? valuesInputState.value[0] : null
 })
 
 function changeArrayInputStateOrPriorityFromWather(who: 'state' | 'priority', newVal: Array<never>, oldVal: Array<never>) {
@@ -42,22 +42,14 @@ function changeArrayInputStateOrPriorityFromWather(who: 'state' | 'priority', ne
 }
 
 watch(filterBy, () => {
-    const route = useRoute()
-    const router = useRouter()
-    const computedQueries: any = {}
-    Object.keys(route.query).forEach(key => {
-        if (!key.includes('filterBy')) {
-            computedQueries[key] = route.query[key]
-        }
-    })
+    const addedQueries: any = {}
+    const deleteQueries: Array<string> = []
     Object.keys(filterBy).forEach(item => {
         const key = item as keyof IFilterBy
-        if (filterBy[key]) {
-            computedQueries[`filterBy${key[0].toUpperCase() + key.slice(1)}`] = filterBy[key]
-        }
+        if (filterBy[key]) addedQueries[key] = filterBy[key]
+        else deleteQueries.push(key)
     })
-    
-    router.push({path: route.path, query: computedQueries})
+    changeQuery(addedQueries, deleteQueries)
 })
 
 </script>
@@ -65,9 +57,9 @@ watch(filterBy, () => {
 <template>
     <div>
         <label for="filterStartDate">По начальной дате</label>
-        <input type="checkbox" name="filterDate" id="filterStartDate" v-model="filterBy.creationDate">
+        <input type="checkbox" name="filterDate" id="filterStartDate" v-model="filterBy.filterByCreationDate">
         <label for="filterEndDate">По конечной дате</label>
-        <input type="checkbox" name="filterDate" id="filterEndDate" v-model="filterBy.endDate">
+        <input type="checkbox" name="filterDate" id="filterEndDate" v-model="filterBy.filterByEndDate">
         <div>
             <p class="filter-title">По приоритету</p>
             <div class="" v-for="(item, index) in EPriorityTaskRu" :key="index">
