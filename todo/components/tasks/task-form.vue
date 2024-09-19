@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-export type { EStateTask, EPriorityTask, ITask } from '../composables/types'
+export type { EStateTask, EPriorityTask, ITask } from '~/composables/types'
 
 const todoStore = useTodoStore()
 const newTask: ITask = reactive({
@@ -42,7 +42,7 @@ function addNewTask() {
         case 'ok':
             newTask.priority = EPriorityTask[priorityTask.value]
             todoStore.addTask(newTask)
-            useRouter().replace('/my-tasks')
+            useRouter().push('/my-tasks')
             break;
         case 'title':
             callAlert('Введите название')
@@ -236,7 +236,7 @@ function callAlert(title: string) {
     position: relative;
     height: 100%;
     background-color: transparent;
-    background-image: url(../assets/img/pages/input-file.svg);
+    background-image: url(~/assets/img/pages/input-file.svg);
     background-repeat: no-repeat;
     background-position: 50% 20%;
     background-size: 25%;

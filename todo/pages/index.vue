@@ -46,7 +46,7 @@ const getPassedTime = computed(() => {
 })
 
 function goToTheTaskPage(taskId: number) {
-    useRouter().replace(`/task-id-${taskId}`)
+    useRouter().push(`/task-id-${taskId}`)
 }
 
 </script>

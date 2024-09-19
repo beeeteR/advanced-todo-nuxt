@@ -11,7 +11,6 @@ export const useTodoStore = defineStore('todoStore', {
         currentTheme: 'light' as TTheme
     }),
     getters: {
-        // getter == computed
         getTasks: (state) => {
             return state.tasks
         },

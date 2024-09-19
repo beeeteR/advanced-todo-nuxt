@@ -2,8 +2,7 @@
 import { type ITask } from '~/composables/types';
 
 const todoStore = useTodoStore();
-const route = useRoute()
-const tasks = computed(() => getSortedTasks(getFilteredTasks(todoStore.getNonVitalTasks())))
+const tasks = computed(() => getSortedTasks(getFilteredTasks(useRoute().query['isVital'] ? todoStore.getVitalsTasks() : todoStore.getNonVitalTasks())))
 const selectedTaskId = ref<number>(-1);
 
 function changeSelectedCard(taskId: number) {

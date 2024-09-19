@@ -7,7 +7,6 @@ type TQueryParamsForFilter<IFilterBy> = {
     [K in keyof IFilterBy]?: IFilterBy[K]
 }
 
-const todoStore = useTodoStore()
 const filterBy = reactive<IFilterBy>({
     filterByCreationDate: null,
     filterByEndDate: null,
