@@ -1,12 +1,19 @@
 <script setup lang="ts">
 
-import { EEngRuSortedNames, type ISortBy, type TValidValueForSort } from '~/composables/types'
+import { EEngRuSortedNames, type ISortBy, type TValidValueForSort, type TSortNameForQuery, ESortType } from '~/composables/types'
 
 const sortBy = reactive<ISortBy<typeof EEngRuSortedNames>>({
     priority: 0,
     state: 0,
     createDate: 0,
     endDate: 0,
+})
+
+onMounted(() => {
+    const queries: TSortNameForQuery = useRoute().query
+    if (queries.sortByKey && queries.sortByValue) {
+        sortBy[queries.sortByKey] = Number(queries.sortByValue) as TValidValueForSort
+    }
 })
 
 function changeSortBy(key: keyof typeof EEngRuSortedNames, nowValue: ESortType) {
@@ -22,8 +29,8 @@ function changeSortBy(key: keyof typeof EEngRuSortedNames, nowValue: ESortType) 
 }
 
 watch(sortBy, () => {
-    const addedQueries: any = {}
-    const deleteQueries: Array<string> = ['sortByKey', 'sortByValue']
+    const addedQueries: TSortNameForQuery = {sortByKey: undefined, sortByValue: undefined}
+    const deleteQueries: Array<keyof TSortNameForQuery> = []
     Object.keys(sortBy).forEach(item => {
         const key = item as keyof ISortBy<typeof EEngRuSortedNames>
         if (sortBy[key] != ESortType.notSorted) {

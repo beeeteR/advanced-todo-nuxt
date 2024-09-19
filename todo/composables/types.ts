@@ -1,3 +1,12 @@
+// COMMON
+
+
+export type TTheme = 'light' | 'dark'
+
+
+// TYPES OF TASKS
+
+
 export enum EStateTask {
     created = 1,
     started = 2,
@@ -21,11 +30,6 @@ export enum EPriorityTaskRu {
 }
 
 export type TDescTask = string | null
-export type TTheme = 'light' | 'dark'
-export type TValidValueForSort = -1 | 0 | 1
-export type ISortBy<T> = {
-    -readonly [K in keyof T]: TValidValueForSort
-}
 
 export interface ITask {
     id: number,
@@ -38,6 +42,10 @@ export interface ITask {
     file: File | undefined,
     vital: boolean
 }
+
+
+// TRANSLATE DATE
+
 
 export enum ERuMonth {
     'Января' = 1,
@@ -66,6 +74,12 @@ export enum typesWordDays {
     'дней' = 5
 }
 
+
+// TYPES OF SORT
+
+
+export type TValidValueForSort = -1 | 0 | 1
+
 export enum ESortType {
     descending = -1,
     notSorted = 0,
@@ -77,4 +91,24 @@ export enum EEngRuSortedNames {
     state = 'Статус',
     createDate = 'Дата создания',
     endDate = 'Дата окончания',
+}
+
+export type TSortNameForQuery = {
+    sortByKey?: keyof typeof EEngRuSortedNames,
+    sortByValue?: TValidValueForSort
+}
+
+export type ISortBy<T> = {
+    -readonly [K in keyof T]: TValidValueForSort
+}
+
+
+// TYPES OF FILTER
+
+
+export interface IFilterBy {
+    filterByCreationDate: null | boolean,
+    filterByEndDate: null | boolean,
+    filterByPriority: null | EPriorityTask,
+    filterByState: null | EStateTask
 }

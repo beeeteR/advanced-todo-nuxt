@@ -1,34 +1,9 @@
 <script setup lang="ts">
-import { EEngRuSortedNames, type ITask } from '~/composables/types';
+import { type ITask } from '~/composables/types';
 
 const todoStore = useTodoStore();
-// const routeQueries = useRoute().query
-// console.log(routeQueries);
-
-const tasks = computed(() => {
-	const routeQueries = useRoute().query
-	if (!routeQueries.sortByKey && !routeQueries.sortByValue) return todoStore.getNonVitalTasks()
-	let sortedTasks: ITask[] = todoStore.getNonVitalTasks()
-	for (const item in EEngRuSortedNames) {
-		if (item === routeQueries.sortByKey) {
-			switch (item) {
-				case 'priority':
-					sortedTasks = sortedTasks.sort((prev, cur) => cur.priority - prev.priority)
-					break
-				case 'state':
-					sortedTasks = sortedTasks.sort((prev, cur) => cur.state - prev.state)
-					break
-				case 'createDate':
-					sortedTasks = sortedTasks.sort((prev, cur) => cur.creationDateTimestamp - prev.creationDateTimestamp)
-					break
-				case 'endDate':
-					sortedTasks = sortedTasks.sort((prev, cur) => cur.endDateTimespamp - prev.endDateTimespamp)
-					break
-			}
-		}
-	}
-	return routeQueries.sortByValue == -1 ? sortedTasks : sortedTasks.reverse()
-});
+const route = useRoute()
+const tasks = computed(() => getSortedTasks(getFilteredTasks(todoStore.getNonVitalTasks())))
 const selectedTaskId = ref<number>(-1);
 
 function changeSelectedCard(taskId: number) {
@@ -38,6 +13,7 @@ function changeSelectedCard(taskId: number) {
 function taskDeleted() {
 	selectedTaskId.value = -1
 }
+
 </script>
 
 <template>
