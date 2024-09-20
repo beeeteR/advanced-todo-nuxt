@@ -15,7 +15,7 @@ const route = ref(useRoute())
                 <img class="nav__link-img" src="~/assets/img/side-nav/add-task.svg"></img>
                 <p class="nav__link-title">Создать задачу</p>
             </nuxt-link>
-            <nuxt-link to="/my-tasks" class="nav__link" :class="{ '--link-active': route.name === 'my-tasks' && !route.query['isVital'] }">
+            <nuxt-link to="/my-tasks" class="nav__link" :class="{ '--link-active': route.name === 'my-tasks' && !route.query['isVital'] && !route.query['search'] }">
                 <img class="nav__link-img" src="~/assets/img/side-nav/my-task.svg"></img>
                 <p class="nav__link-title">Мои задачи</p>
             </nuxt-link>

@@ -18,7 +18,7 @@ onMounted(() => {
 
 <template>
     <div class="app">
-        <layout-app-header />
+        <layout-header-app-header />
         <div class="wrapper">
             <div class="content-layout">
                 <slot></slot>

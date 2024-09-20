@@ -34,6 +34,9 @@ export const useTodoStore = defineStore('todoStore', {
         getTaskById: (state) => {
             return (id: number): ITask | undefined => state.tasks.find(task => task.id === id)
         },
+        getTasksByName: (state) => {
+            return (text: string): ITask[] => state.tasks.filter(el => el.name.toLowerCase().includes(text))
+        },
         checkTaskIsVital(state) {
             return (id: number) => !!this.getTaskById(id)?.vital
         },
