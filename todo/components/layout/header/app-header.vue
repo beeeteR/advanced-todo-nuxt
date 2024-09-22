@@ -20,30 +20,12 @@ const dateStrForHTML = computed(() => {
     let month = localDate.getMonth()
     return `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month + 1}/${localDate.getFullYear()}`
 })
-const searchedTasks = ref<ITask[]>([])
-const searchInputIsFocus = ref<boolean>(false)
-const searchInputElement = ref<HTMLInputElement>()
 
 function changingDate(timestamp: number) {
     date.value = timestamp
     todoStore.setChoicedTimestamp(timestamp)
 }
-function searchTasks(e: Event) {
-    const target = e.target as HTMLInputElement
-    searchedTasks.value = target.value === '' ? [] : todoStore.getTasksByName(target.value)
-}
-function changeFocusedInput(e: Event) {
-    setTimeout(() => {
-        searchInputIsFocus.value = e.type === 'focusin' ? true : false
-    }, 100)
-}
-function goToPageTasks(e: Event) {
-    const keyboard = e as KeyboardEvent
-    if ((e.type === 'keypress' && keyboard.code === 'Enter') || e.type === 'click') {
-        useRouter().push(`my-tasks?search=${searchInputElement.value?.value}`)
-        searchInputIsFocus.value = false
-    }
-}
+
 </script>
 
 
@@ -53,20 +35,7 @@ function goToPageTasks(e: Event) {
             <span>To</span>
             <span>-Do</span>
         </nuxt-link>
-        <div class="search">
-            <div class="search__input">
-                <input type="text" ref="searchInputElement" class="search__input-field"
-                    :class="{ '--top-border-radius': searchedTasks.length > 0 && searchInputIsFocus }"
-                    placeholder="Найдите свою задачу здесь..." @input="searchTasks" @focusin="changeFocusedInput"
-                    @focusout="changeFocusedInput" @keypress="goToPageTasks">
-                <button class="search__input-btn" @click="goToPageTasks">
-                    <img src="~/assets/img/header/SearchICon.svg" alt="">
-                </button>
-            </div>
-            <div class="search__tasks" v-show="searchedTasks.length && searchInputIsFocus">
-                <layout-header-task-item v-for="item in searchedTasks" :key="item.id" :task="item" />
-            </div>
-        </div>
+        <layout-header-search />
         <div class="header__info">
             <div class="header__btns">
                 <div class="btn-img">
@@ -104,53 +73,6 @@ function goToPageTasks(e: Event) {
                 &:first-child {
                     color: map-get($colors, 'pink');
                 }
-            }
-        }
-
-        .search {
-            position: relative;
-
-            &__input {
-                display: flex;
-
-                &-field {
-                    width: 100%;
-                    font-size: 12px;
-                    font-weight: 600;
-                    padding: 10px 15px;
-                    border: none;
-                    border-radius: 0.5rem;
-                    box-shadow: -2px 2px 4px 2px rgb(235, 235, 235);
-                    transition: all 200ms;
-
-                    &:focus {
-                        box-shadow: 0 2px 8px 2px rgb(200, 200, 200);
-                    }
-                }
-
-                &-btn {
-                    position: absolute;
-                    right: 0;
-
-                    img {
-                        height: 100%;
-                        aspect-ratio: 1;
-                    }
-                }
-            }
-
-            .search__tasks {
-                position: absolute;
-                width: 100%;
-                z-index: 10;
-                background-color: #F8F8F8;
-                border-top: 1px solid map-get($colors, 'pink');
-            }
-
-            .--top-border-radius {
-                border-radius: 0;
-                border-top-left-radius: 0.5rem;
-                border-top-right-radius: 0.5rem;
             }
         }
     }

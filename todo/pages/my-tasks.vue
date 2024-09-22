@@ -28,7 +28,7 @@ function taskDeleted() {
 	<div class="my-tasks-page">
 		<div class="tasks --border-wrapper">
 			<div class="tasks__header">
-				<common-page-title title="Мои задачи" />
+				<common-page-title :title="route.query['search'] ? 'Задачи по запросу' : 'Мои задачи'" />
 				<tasks-filter-menu />
 				<tasks-sort-menu />
 			</div>
