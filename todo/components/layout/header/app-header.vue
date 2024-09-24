@@ -39,7 +39,7 @@ function changingDate(timestamp: number) {
         <div class="header__info">
             <div class="header__btns">
                 <div class="btn-img">
-                    <img src="~/assets/img/header/Notifications.svg" alt="">
+                    <layout-header-notifications />
                 </div>
                 <div class="btn-img">
                     <img class="btn__img-datetime" src="~/assets/img/header/Cal.svg" alt="">

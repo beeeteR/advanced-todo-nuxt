@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { type ITask, type TDescTask, type EPriorityTask, EStateTask, type TTheme } from '~/composables/types'
+import { type ITask, EStateTask, type TTheme, type INotification } from '~/composables/types'
 
 export const NAME_LOCALSTORAGE = 'MyTodoTasks'
 
@@ -8,7 +8,8 @@ export const useTodoStore = defineStore('todoStore', {
         tasks: [] as ITask[],
         currentTimestamp: Date.now() as number,
         selectedTimestamp: Date.now() as number,
-        currentTheme: 'light' as TTheme
+        currentTheme: 'light' as TTheme,
+        notifications: [] as INotification[]
     }),
     getters: {
         getTasks: (state) => {
@@ -57,21 +58,25 @@ export const useTodoStore = defineStore('todoStore', {
         },
         getCurrentTheme: (state) => {
             return state.currentTheme
+        },
+        getNotifications: (state) => {
+            return state.notifications
         }
     },
     actions: {
         changeCurrentTimestamp() {
             setInterval(() => {
                 this.currentTimestamp = Date.now()
+                this.setNotification()
             }, 60000)
         },
         resetTasks() {
             this.tasks.length = 0
-            this.setTaskToLocalStorage()
+            setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
         },
         addTask(task: ITask) {
             this.tasks.push(task)
-            this.setTaskToLocalStorage()
+            setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
         },
         delTaskById(id: number) {
             let taskById = this.getTaskById(id)
@@ -81,7 +86,7 @@ export const useTodoStore = defineStore('todoStore', {
 
             let findedIndex = this.tasks.indexOf(taskById)
             this.tasks.splice(findedIndex, 1)
-            this.setTaskToLocalStorage()
+            setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
         },
         changeStateTask(stateNum: number, id: number) {
             let taskById = this.getTaskById(id)
@@ -89,7 +94,7 @@ export const useTodoStore = defineStore('todoStore', {
                 return 'Error: Task is not found'
             }
             taskById.state = stateNum
-            this.setTaskToLocalStorage()
+            setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
         },
         changeTastVital(id: number) {
             const task = this.tasks.find(el => el.id === id) // findIndex
@@ -97,12 +102,9 @@ export const useTodoStore = defineStore('todoStore', {
             task.vital = !task.vital
             const taskIndex = this.tasks.indexOf(task)
             this.tasks[taskIndex] = task
-            this.setTaskToLocalStorage()
+            setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
         },
-        setTaskToLocalStorage() { // + папка utils
-            localStorage.setItem(NAME_LOCALSTORAGE, JSON.stringify(this.tasks))
-        },
-        setTasksFromLocalStorage() {
+        setTasksFromLocalStorage() { // + utils
             const tasksLS = JSON.parse(localStorage.getItem(NAME_LOCALSTORAGE) || '{}')
             if (Object.keys(tasksLS).length === 0) return null
             try {
@@ -117,6 +119,9 @@ export const useTodoStore = defineStore('todoStore', {
         },
         changeCurrentTheme() {
             this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light'
+        },
+        setNotification() {
+            this.notifications = getNotificationForLastOrAfterLastDayTask()
         }
     }
 })

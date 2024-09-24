@@ -112,3 +112,34 @@ export interface IFilterBy {
     filterByPriority: null | EPriorityTask,
     filterByState: null | EStateTask
 }
+
+
+// NOTIFICATIONS
+
+
+export enum ENotificationTypes {
+    lastDay = 'последний день выполнения',
+    afterLastDay = 'просрочено',
+    other = 'другое',
+}
+
+type TNotificationRequiredTask = 
+    ENotificationTypes.lastDay | 
+    ENotificationTypes.afterLastDay
+
+interface INotificationBase {
+    type: ENotificationTypes,
+    important?: true
+}
+
+interface INotificationWithoutTask extends INotificationBase {
+    type: ENotificationTypes.other,
+    taskId?: never
+}
+
+interface INotificationWithTask extends INotificationBase {
+    type: TNotificationRequiredTask,
+    taskId: number
+}
+
+export type INotification = INotificationWithTask | INotificationWithoutTask 
