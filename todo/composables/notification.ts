@@ -6,9 +6,9 @@ export function getNotificationForLastOrAfterLastDayTask() {
         const oneDay = 1000 * 60 * 60 * 24
         if (item.state != EStateTask.finished) {
             if (curTimestamp - taskEndTimestamp < oneDay) {
-                acc.push({ type: ENotificationTypes.lastDay, taskId: item.id })
+                acc.push({ type: ENotificationTypes.lastDay, task: item })
             } else if (curTimestamp - taskEndTimestamp > 0) {
-                acc.push({ type: ENotificationTypes.afterLastDay, taskId: item.id })
+                acc.push({ type: ENotificationTypes.afterLastDay, task: item })
             }
         }
         return acc

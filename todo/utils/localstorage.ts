@@ -1,7 +1,5 @@
 export function setToLocalStorage(key: string, data: Object) {
     localStorage.setItem(key, JSON.stringify(data))
-    console.log(data);
-    
 }
 
 export function getFromLocalStorage(key: string) {

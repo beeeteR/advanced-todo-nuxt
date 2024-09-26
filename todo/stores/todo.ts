@@ -77,6 +77,7 @@ export const useTodoStore = defineStore('todoStore', {
         addTask(task: ITask) {
             this.tasks.push(task)
             setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
+            if (this.currentTimestamp - task.endDateTimespamp < 1000 * 60 * 60 * 24) this.setNotification()
         },
         delTaskById(id: number) {
             let taskById = this.getTaskById(id)

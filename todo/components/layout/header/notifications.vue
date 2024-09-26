@@ -2,21 +2,19 @@
 
 const todoStore = useTodoStore()
 const notifications = computed(() => todoStore.getNotifications)
-const tasks = computed(() => notifications.value.reduce((acc, item) => {
-    if (item.taskId) {
-        const task = todoStore.getTaskById(item.taskId)
-        if (task) acc.push(task)
-    }
-    return acc
-}, [] as ITask[]))
 const showNotification = ref<boolean>(false)
+const stateTasks = computed(() => notifications.value.map(item => item.task?.state))
 
 function changeStateNotifications(state?: boolean) {
     showNotification.value = state === undefined ? !showNotification.value : state
 }
-function getTypeById(id: number) {
-    return notifications.value.find(item => item.taskId === id)?.type
-}
+
+watch(stateTasks, () => {
+    if (stateTasks.value.includes(EStateTask.finished)) {
+        todoStore.setNotification()
+    }
+})
+
 </script>
 
 <template>
@@ -27,18 +25,16 @@ function getTypeById(id: number) {
         </div>
         <div class="notifications__list" :class="{ 'notifications__list-active': showNotification }"
             @click="changeStateNotifications(false)" @mouseleave="changeStateNotifications(false)">
-            <nuxt-link 
-                    class="notifications__item" 
-                    v-for="(task, index) in tasks" :key="index"
-                    :to="`task-id-${task.id}`"
-                    :class="{ 
-                        '--bg-light-blue': getTypeById(task.id) === ENotificationTypes.lastDay, 
-                        '--bg-red': getTypeById(task.id) === ENotificationTypes.afterLastDay 
-                        }">
-                <h3>{{ task.name }}</h3>
-                <p>{{ EStateTaskRu[EStateTask[task.state]] }}</p>
-                <p>{{ EPriorityTaskRu[EPriorityTask[task.priority]] }}</p>
-                <p>{{ ENotificationTypes[getTypeById(task.id)] }}</p>
+            <nuxt-link class="notifications__item" v-for="(notificationsItem, index) in notifications" :key="index"
+                :to="`task-id-${notificationsItem.task?.id}`" :class="{
+                    '--bg-light-blue': notificationsItem.type === ENotificationTypes.lastDay,
+                    '--bg-red': notificationsItem.type === ENotificationTypes.afterLastDay
+                }">
+                <h3>{{ notificationsItem.task?.name }}</h3>
+                <p>{{ EStateTaskRu[notificationsItem.task?.state as unknown as keyof typeof EStateTaskRu] }}</p>
+                <p>{{ EPriorityTaskRu[notificationsItem.task?.priority as unknown as keyof typeof EPriorityTaskRu] }}
+                </p>
+                <p>{{ notificationsItem.type }}</p>
             </nuxt-link>
         </div>
     </div>

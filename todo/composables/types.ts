@@ -129,17 +129,17 @@ type TNotificationRequiredTask =
 
 interface INotificationBase {
     type: ENotificationTypes,
-    important?: true
+    deletedAfterPeriod?: true
 }
 
 interface INotificationWithoutTask extends INotificationBase {
     type: ENotificationTypes.other,
-    taskId?: never
+    task?: never
 }
 
 interface INotificationWithTask extends INotificationBase {
     type: TNotificationRequiredTask,
-    taskId: number
+    task: ITask
 }
 
 export type INotification = INotificationWithTask | INotificationWithoutTask 
