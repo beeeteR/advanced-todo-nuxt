@@ -118,7 +118,7 @@ export interface IFilterBy {
 
 
 export enum ENotificationTypes {
-    lastDay = 'последний день выполнения',
+    lastDay = 'последний день',
     afterLastDay = 'просрочено',
     other = 'другое',
 }
@@ -142,4 +142,4 @@ interface INotificationWithTask extends INotificationBase {
     task: ITask
 }
 
-export type INotification = INotificationWithTask | INotificationWithoutTask 
+export type INotification = INotificationWithTask | INotificationWithoutTask

@@ -7,7 +7,7 @@ onMounted(() => {
         todoStore.setTasksFromLocalStorage()
     }
     todoStore.changeCurrentTimestamp()
-    todoStore.setNotification()
+    todoStore.setNotifications()
 
     const oneYearOldTasks = todoStore.getTasks.filter(task => Date.now() - task.creationDateTimestamp > 365 * 24 * 60 * 60 * 1000 || task.creationDateTimestamp > task.endDateTimespamp || task.endDateTimespamp - Date.now() > 365 * 24 * 60 * 60 * 1000)
     oneYearOldTasks.forEach(task => {

@@ -67,7 +67,7 @@ export const useTodoStore = defineStore('todoStore', {
         changeCurrentTimestamp() {
             setInterval(() => {
                 this.currentTimestamp = Date.now()
-                this.setNotification()
+                this.setNotifications()
             }, 60000)
         },
         resetTasks() {
@@ -77,7 +77,7 @@ export const useTodoStore = defineStore('todoStore', {
         addTask(task: ITask) {
             this.tasks.push(task)
             setToLocalStorage(NAME_LOCALSTORAGE, this.tasks)
-            if (this.currentTimestamp - task.endDateTimespamp < 1000 * 60 * 60 * 24) this.setNotification()
+            if (this.currentTimestamp - task.endDateTimespamp < 1000 * 60 * 60 * 24) this.setNotifications()
         },
         delTaskById(id: number) {
             let taskById = this.getTaskById(id)
@@ -121,7 +121,7 @@ export const useTodoStore = defineStore('todoStore', {
         changeCurrentTheme() {
             this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light'
         },
-        setNotification() {
+        setNotifications() {
             this.notifications = getNotificationForLastOrAfterLastDayTask()
         }
     }
