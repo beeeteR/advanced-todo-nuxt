@@ -26,12 +26,7 @@ function dateToJSFromHTML(htmlElem: HTMLInputElement) {
 }
 
 function dateToHTMLFromJS(dateTimestamp: number) {
-	const thisDate = new Date(dateTimestamp)
-	const year = thisDate.getFullYear()
-	const month = thisDate.getMonth()
-	const day = thisDate.getDate()
-
-	return `${year}-${month < 10 ? "0" : ""}${month + 1}-${day < 10 ? "0" : ""}${day}`;
+	return getTextFormatDate(dateTimestamp).split('/').reverse().join('-')
 }
 
 function updateSelectedDate(e: Event) {

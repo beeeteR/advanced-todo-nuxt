@@ -6,13 +6,15 @@
 
     &::-webkit-scrollbar {
         width: 8px;
-    }
-    &::-webkit-scrollbar-track {
-        box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: map-get($colors, 'pink');
-        border-radius: 0.5rem;
+
+        &-track {
+            box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+            background-color: white;
+        }
+        &-thumb {
+            background-color: map-get($colors, 'pink');
+            border-radius: 0.5rem;
+        }
     }
 }
 

@@ -41,7 +41,7 @@ watch(stateTasks, () => {
                 <div class="notifications__item-date">
                     <p class="date__start">Дата создания: {{
                         getTextFormatDate(notificationsItem.task!.creationDateTimestamp)
-                        }}</p>
+                    }}</p>
                     <p class="date__end">Дата окончания: {{
                         getTextFormatDate(notificationsItem.task!.endDateTimespamp) }}</p>
 
@@ -68,6 +68,15 @@ $maxWidthNotificationsList: 480px;
         overflow-y: auto;
         z-index: 5;
 
+        &::-webkit-scrollbar { 
+
+            &-track {
+
+                border-top-right-radius: .5rem;
+                border-bottom-right-radius: .5rem;
+            }
+        }
+
         &-active {
             max-height: 240px;
             box-shadow: 2px 2px 8px 1px map-get($colors, 'light-grey');
@@ -87,10 +96,7 @@ $maxWidthNotificationsList: 480px;
         }
 
         &-name {
-            max-width: calc($maxWidthNotificationsList / 3 * 2);
-            overflow-x: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            @include limited-text($maxWidthNotificationsList / 3 * 2);
             font-size: 18px;
             font-weight: 500;
             color: map-get($colors, 'pink');
@@ -98,10 +104,6 @@ $maxWidthNotificationsList: 480px;
 
         &-info {
             .info {
-                &__state {}
-
-                &__priority {}
-
                 &__state,
                 &__priority {
                     font-size: 14px;

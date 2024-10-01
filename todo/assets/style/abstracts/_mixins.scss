@@ -1,0 +1,10 @@
+@mixin limited-text($width, $maxLines: 1) {
+    max-width: $width;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2em;
+    display: -webkit-box;
+    -webkit-line-clamp: #{$maxLines};
+    -webkit-box-orient: vertical;
+}

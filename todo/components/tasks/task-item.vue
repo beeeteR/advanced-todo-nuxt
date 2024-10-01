@@ -104,7 +104,12 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
     }
 
     .task {
+        max-width: 100%;
+        $max-width-breakpoints: (
+            'xl': 1150px
+        );
         &__title {
+            @include limited-text(95%);
             font-weight: 600;
             font-size: 1rem;
             font-weight: 600;
@@ -117,6 +122,7 @@ function getElementTaskActions(htmlEl: HTMLElement | undefined) {
         }
 
         &__desc {
+            @include limited-text(95%, 5);
             font-size: 14px;
             font-weight: 300;
             color: map-get($colors, 'light-grey');

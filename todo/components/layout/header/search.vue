@@ -2,7 +2,7 @@
 
 const todoStore = useTodoStore()
 const searchedTasks = ref<ITask[]>([])
-const searchInputIsFocus = ref<boolean>(false)
+const searchInputIsFocus = ref<boolean>(true)
 const searchInputText = ref<string>('')
 const route = reactive(useRoute())
 const selectedTaskId = ref<number>()
@@ -14,22 +14,28 @@ function searchTasks(e: Event) {
 function changeFocusedInput(e: Event) {
     setTimeout(() => {
         searchInputIsFocus.value = e.type === 'focusin' ? true : false
+        setSelectedTask(-1)
     }, 100)
+}
+function setSelectedTask(id: number) {
+    selectedTaskId.value = id
 }
 function keyPressInInput(e: Event) {
     const keyboard = e as KeyboardEvent
     if (keyboard.code === 'Enter') {
         if (selectedTaskId.value === -1) goToPageTasks()
         else goToPageTasks(true)
-        selectedTaskId.value = -1
+        setSelectedTask(-1)
     } else {
         const currentSelectedTaskIndex = searchedTasks.value.findIndex(task => task.id === selectedTaskId.value)
         if (keyboard.code === 'ArrowDown') {
             e.preventDefault()
-            selectedTaskId.value = currentSelectedTaskIndex === searchedTasks.value.length - 1 ? -1 : currentSelectedTaskIndex === -1 ? selectedTaskId.value = searchedTasks.value[0].id : searchedTasks.value[currentSelectedTaskIndex + 1].id
+            setSelectedTask(currentSelectedTaskIndex === searchedTasks.value.length - 1 ?
+                -1 : currentSelectedTaskIndex === -1 ? searchedTasks.value[0].id : searchedTasks.value[currentSelectedTaskIndex + 1].id)
         } else if (keyboard.code === 'ArrowUp') {
             e.preventDefault()
-            selectedTaskId.value = currentSelectedTaskIndex === 0 ? -1 : currentSelectedTaskIndex === -1 ? searchedTasks.value[searchedTasks.value.length - 1].id : searchedTasks.value[currentSelectedTaskIndex - 1].id
+            setSelectedTask(currentSelectedTaskIndex === 0 ?
+                -1 : currentSelectedTaskIndex === -1 ? searchedTasks.value[searchedTasks.value.length - 1].id : searchedTasks.value[currentSelectedTaskIndex - 1].id)
         }
     }
 }
@@ -56,7 +62,7 @@ watch(() => route.fullPath, () => {
         </div>
         <div class="search__tasks" v-show="searchedTasks.length && searchInputIsFocus">
             <layout-header-task-item v-for="item in searchedTasks" :key="item.id" :task="item"
-                :class="{ '--searched-selected-task': selectedTaskId === item.id }" />
+                :class="{ '--searched-selected-task': selectedTaskId === item.id }" @mouseenter="setSelectedTask(item.id)" />
         </div>
     </div>
 </template>
@@ -97,12 +103,12 @@ watch(() => route.fullPath, () => {
     .search__tasks {
         position: absolute;
         width: 100%;
-        z-index: 10;
         background-color: #F8F8F8;
         border-top: 1px solid map-get($colors, 'pink');
+        z-index: 10;
 
         .--searched-selected-task {
-            box-shadow: inset 0 0 30px 0px map-get($colors, 'light-grey');
+            background-color: map-get($colors, 'ultra-light-grey');
         }
     }
 

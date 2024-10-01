@@ -15,10 +15,7 @@ const dayOfWeek = computed(() => {
     return WeekDay[new Date(date.value).getDay()]
 })
 const dateStrForHTML = computed(() => {
-    const localDate = new Date(date.value)
-    let day = localDate.getDate()
-    let month = localDate.getMonth()
-    return `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month + 1}/${localDate.getFullYear()}`
+    return getTextFormatDate(date.value)
 })
 
 function changingDate(timestamp: number) {
