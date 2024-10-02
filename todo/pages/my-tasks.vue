@@ -34,7 +34,8 @@ function taskDeleted() {
 			</div>
 			<div class="tasks__body">
 				<tasks-task-item v-for="item in tasks" :key="item.id" :task="item"
-					:isSelect="selectedTaskId === item.id" @cardSelected="changeSelectedCard" />
+					:isSelect="selectedTaskId === item.id" @cardSelected="changeSelectedCard" v-show="tasks" />
+				<common-tasks-not-found v-show="tasks.length === 0" />
 			</div>
 		</div>
 		<div class="selected-task --border-wrapper" v-show="selectedTaskId != -1">

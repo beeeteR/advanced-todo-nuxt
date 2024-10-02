@@ -103,8 +103,11 @@ watch(() => route.fullPath, () => {
     .search__tasks {
         position: absolute;
         width: 100%;
+        max-height: 400px;
         background-color: #F8F8F8;
         border-top: 1px solid map-get($colors, 'pink');
+        box-shadow: 2px 2px 8px 0px map-get($colors, 'light-grey');
+        overflow-y: auto;
         z-index: 10;
 
         .--searched-selected-task {

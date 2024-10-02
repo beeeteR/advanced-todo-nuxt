@@ -76,8 +76,11 @@ function goToTheTaskPage(taskId: number) {
                 </div>
             </div>
             <div class="dashboard__tasks-by-date">
-                <tasks-task-item v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id"
-                    :task="task" @cardSelected="goToTheTaskPage(task.id)" />
+                <div v-show="neededToThisComponentTasks.nonVitalBySelectedDate">
+                    <tasks-task-item v-for="(task) in neededToThisComponentTasks.nonVitalBySelectedDate" :key="task.id"
+                        :task="task" @cardSelected="goToTheTaskPage(task.id)" />
+                </div>
+                <common-tasks-not-found v-show="neededToThisComponentTasks.nonVitalBySelectedDate.length === 0"/>
             </div>
             <div class="dashboard__vital-tasks-by-date" v-if="neededToThisComponentTasks.vitalBySelectedDate.length">
                 <span class="dashboard__tasks-separator"></span>
@@ -213,5 +216,4 @@ function goToTheTaskPage(taskId: number) {
         }
     }
 }
-
 </style>

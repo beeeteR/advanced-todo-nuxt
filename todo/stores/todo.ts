@@ -16,18 +16,9 @@ export const useTodoStore = defineStore('todoStore', {
             return state.tasks
         },
         getTasksByDate: (state) => {
-            return (timestamp: number, isEndDate?: boolean) => {
-                const date = new Date(timestamp)
-                const year = date.getFullYear()
-                const month = date.getMonth()
-                const day = date.getDate()
-
-                return state.tasks.filter((task: ITask) =>
-                    new Date(isEndDate ? task.endDateTimespamp : task.creationDateTimestamp).getFullYear() === year &&
-                    new Date(isEndDate ? task.endDateTimespamp : task.creationDateTimestamp).getMonth() === month &&
-                    new Date(isEndDate ? task.endDateTimespamp : task.creationDateTimestamp).getDate() === day
-                )
-            }
+            return (timestamp: number, isEndDate?: boolean) =>
+                state.tasks.filter((task: ITask) =>
+                    getTextFormatDate(timestamp) === getTextFormatDate(isEndDate ? task.endDateTimespamp : task.creationDateTimestamp))
         },
         getCompletedTasks: (state) => {
             return state.tasks.filter(task => task.state === EStateTask.finished)
@@ -42,10 +33,10 @@ export const useTodoStore = defineStore('todoStore', {
             return (id: number) => !!this.getTaskById(id)?.vital
         },
         getVitalsTasks: (state) => {
-            return (tasks?: ITask[]) => tasks?.length ? tasks.filter(el => el.vital) : state.tasks.filter(el => el.vital)
+            return (tasks?: ITask[]) => tasks ? tasks.filter(el => el.vital) : state.tasks.filter(el => el.vital)
         },
         getNonVitalTasks: (state) => {
-            return (tasks?: ITask[]) => tasks?.length ? tasks.filter(el => !el.vital) : state.tasks.filter(el => !el.vital)
+            return (tasks?: ITask[]) => tasks ? tasks.filter(el => !el.vital) : state.tasks.filter(el => !el.vital)
         },
         getTimestamps: (state) => {
             return {

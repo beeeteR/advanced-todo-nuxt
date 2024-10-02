@@ -9,7 +9,7 @@ const props = defineProps<IHeaderTaskItemProps>()
     <nuxt-link :to="`task-id-${props.task.id}`" class="searched__task">
         <div class="searched__task-main">
             <p>{{ props.task.name }}</p>
-            <p>{{ props.task.desc }}</p>
+            <p>{{ props.task.desc || 'Описание отсутствует'  }}</p>
         </div>
         <div class="searched__task-extra">
             <tasks-task-priority :priority="props.task.priority" />
@@ -40,7 +40,9 @@ const props = defineProps<IHeaderTaskItemProps>()
 
             &:last-child {
                 @include limited-text(100%, 3);
-
+                margin-top: .5rem;
+                font-size: 16px;
+                color: map-get($colors, 'light-grey');
             }
         }
     }
